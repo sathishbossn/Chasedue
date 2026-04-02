@@ -1,0 +1,24 @@
+# Anthropic Brand & Style Rules
+
+## 1. Core Visual Identity
+When generating UI components, artifacts, or styling (CSS/Tailwind/Python-pptx), always apply these hex codes:
+
+* **Primary Palette:**
+    * Dark: `#141413` (Text/Dark Backgrounds)
+    * Light: `#faf9f5` (Light Backgrounds/Inverted Text)
+    * Mid Gray: `#b0aea5` (Secondary/Borders)
+    * Light Gray: `#e8e6dc` (Subtle UI elements)
+* **Accent Palette:**
+    * Primary: `#d97757` (Orange)
+    * Secondary: `#6a9bcc` (Blue)
+    * Tertiary: `#788c5d` (Green)
+
+## 2. Typography Constraints
+Enforce the following font stack in all styling tasks:
+* **Headings (24pt+):** `Poppins`, fallback to `Arial`.
+* **Body Text:** `Lora`, fallback to `Georgia`.
+
+## 3. Implementation Logic
+* **Contextual Coloring:** Automatically select text colors (Dark/Light) based on background contrast.
+* **Shape Styling:** Use the Accent Palette (Orange/Blue/Green) for non-text elements and icons.
+* **Python-pptx:** When generating presentations, use the `RGBColor` class with the specific hex values provided above.

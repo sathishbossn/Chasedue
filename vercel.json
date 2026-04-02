@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "name": "flowfinance",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "EXPO_PUBLIC_SUPABASE_URL": "@supabase_url",
+    "EXPO_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
+    "EXPO_PUBLIC_RAZORPAY_KEY_ID": "@razorpay_key_id",
+    "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "@stripe_publishable_key"
+  }
+}

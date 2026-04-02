@@ -9,6 +9,7 @@ import {
   RefreshControl,
   ScrollView,
   Dimensions,
+  Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/context/AuthContext';
@@ -48,15 +49,13 @@ export default function Invoices() {
       
       const { data, error } = await supabase
         .from('invoices')
-        .select(`
-          *,
-          clients:client_id(name)
-        `)
+        .select('id, amount, status, due_date')
         .eq('user_id', session.user.id)
         .order('created_at', { ascending: false });
 
       if (error) {
         console.log('❌ Error fetching invoices:', error);
+        Alert.alert('Database Error', `Fetch failed: ${error.message}`);
         return;
       }
 
@@ -64,6 +63,8 @@ export default function Invoices() {
       setInvoices(data || []);
     } catch (error) {
       console.error('💥 Unexpected error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      Alert.alert('Database Error', `Unexpected error: ${errorMessage}`);
     } finally {
       setLoading(false);
       setRefreshing(false);

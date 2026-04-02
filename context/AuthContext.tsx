@@ -1,11 +1,14 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import { Session } from '@supabase/supabase-js';
+import { Session, User } from '@supabase/supabase-js';
+import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 
 type AuthContextValue = {
   session: Session | null;
+  user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  signOut: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -16,16 +19,45 @@ type Props = {
 
 export function AuthProvider({ children }: Props) {
   const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  const signOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      setSession(null);
+      setUser(null);
+      router.replace('/(auth)/login');
+    } catch (error) {
+      console.error('❌ SignOut error:', error);
+      throw error;
+    }
+  };
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session: s } }) => {
-      setSession(s);
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
       setIsLoading(false);
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, s) => {
-      setSession(s);
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('🔄 Auth state change:', event);
+      
+      if (event === 'SIGNED_OUT') {
+        setSession(null);
+        setUser(null);
+        router.replace('/(auth)/login');
+      } else {
+        setSession(session);
+        setUser(session?.user ?? null);
+      }
+      
+      setIsLoading(false);
     });
 
     return () => subscription.unsubscribe();
@@ -33,8 +65,10 @@ export function AuthProvider({ children }: Props) {
 
   const value: AuthContextValue = {
     session,
+    user,
     isAuthenticated: !!session,
     isLoading,
+    signOut,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

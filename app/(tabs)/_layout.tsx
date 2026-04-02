@@ -1,27 +1,17 @@
-import { Tabs } from 'expo-router';
-import { useAuth } from '@/context/AuthContext';
-import { useEffect } from 'react';
-import { useRouter } from 'expo-router';
+import React from 'react';
+import SidebarLayout from '@/components/SidebarLayout';
+import { Stack } from 'expo-router';
 
-export default function TabsLayout() {
-  const { isAuthenticated, isLoading } = useAuth();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.replace('/(auth)/login');
-    }
-  }, [isAuthenticated, isLoading, router]);
-
-  if (isLoading) {
-    return null; // or loading spinner
-  }
-
+export default function TabLayout() {
   return (
-    <Tabs>
-      <Tabs.Screen name="dashboard" options={{ title: 'Dashboard' }} />
-      <Tabs.Screen name="clients" options={{ title: 'Clients' }} />
-      <Tabs.Screen name="invoices" options={{ title: 'Invoices' }} />
-    </Tabs>
+    <SidebarLayout>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" options={{ href: '/(tabs)' }} />
+        <Stack.Screen name="clients" options={{ href: '/(tabs)/clients' }} />
+        <Stack.Screen name="invoices" options={{ href: '/(tabs)/invoices' }} />
+        <Stack.Screen name="expenses" options={{ href: '/(tabs)/expenses' }} />
+        <Stack.Screen name="profile" options={{ href: '/(tabs)/profile' }} />
+      </Stack>
+    </SidebarLayout>
   );
 }

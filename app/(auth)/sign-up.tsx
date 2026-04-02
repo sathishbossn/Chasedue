@@ -10,6 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import { Link, router } from 'expo-router';
+import { APP_NAME } from '../../src/constants/BrandConfig';
 import { supabase } from '../../lib/supabase';
 
 export default function SignUp() {
@@ -26,7 +27,7 @@ export default function SignUp() {
 
     setLoading(true);
     try {
-      console.log('🔥 CARROTCASH SIGNUP ATTEMPT');
+      console.log(`🔥 ${APP_NAME} SIGNUP ATTEMPT`);
       console.log('📧 Email:', email.toLowerCase().trim());
       console.log('👤 Name:', fullName.trim());
       
@@ -78,7 +79,7 @@ export default function SignUp() {
             color: '#1e293b',
             textAlign: 'center'
           }}>
-            Join CarrotCash
+            Join {APP_NAME}
           </Text>
           
           <Text style={{ 

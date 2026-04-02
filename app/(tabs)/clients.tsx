@@ -152,14 +152,14 @@ export default function Clients() {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF' }}>
         <Text>Loading clients...</Text>
       </View>
     );
   }
 
   return (
-    <View style={{ flex: 1, padding: 20 }}>
+    <View style={{ flex: 1, padding: 20, backgroundColor: '#FFFFFF' }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
         <View>
           <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Clients</Text>
@@ -187,13 +187,13 @@ export default function Clients() {
             setModalVisible(true);
           }}
           style={{ 
-            backgroundColor: !isPro && clients.length >= 3 ? '#ccc' : '#007AFF', 
+            backgroundColor: !isPro && clients.length >= 3 ? '#ccc' : '#d97757', 
             padding: 10, 
             borderRadius: 8 
           }}
           disabled={!isPro && clients.length >= 3}
         >
-          <Text style={{ color: 'white', fontWeight: '600' }}>Add Client</Text>
+          <Text style={{ color: '#faf9f5', fontWeight: '600' }}>Add Client</Text>
         </TouchableOpacity>
       </View>
 
@@ -220,9 +220,9 @@ export default function Clients() {
                 });
                 setModalVisible(true);
               }}
-              style={{ backgroundColor: '#007AFF', padding: 16, borderRadius: 12, paddingHorizontal: 24 }}
+              style={{ backgroundColor: '#d97757', padding: 16, borderRadius: 12, paddingHorizontal: 24 }}
             >
-              <Text style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
+              <Text style={{ color: '#faf9f5', fontSize: 16, fontWeight: '600' }}>
                 Add Your First Client
               </Text>
             </TouchableOpacity>
@@ -255,9 +255,9 @@ export default function Clients() {
               <View style={{ flexDirection: 'row', gap: 10, marginTop: 12 }}>
                 <TouchableOpacity
                   onPress={() => handleEdit(client)}
-                  style={{ backgroundColor: '#007AFF', padding: 8, borderRadius: 4, flex: 1 }}
+                  style={{ backgroundColor: '#d97757', padding: 8, borderRadius: 4, flex: 1 }}
                 >
-                  <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>
+                  <Text style={{ color: '#faf9f5', textAlign: 'center', fontSize: 14 }}>
                     Edit
                   </Text>
                 </TouchableOpacity>
@@ -265,7 +265,7 @@ export default function Clients() {
                   onPress={() => handleDelete(client)}
                   style={{ backgroundColor: '#FF3B30', padding: 8, borderRadius: 4, flex: 1 }}
                 >
-                  <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>
+                  <Text style={{ color: '#faf9f5', textAlign: 'center', fontSize: 14 }}>
                     Delete
                   </Text>
                 </TouchableOpacity>
@@ -400,9 +400,9 @@ export default function Clients() {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={handleSave}
-              style={{ backgroundColor: '#007AFF', padding: 16, borderRadius: 8, flex: 1 }}
+              style={{ backgroundColor: '#d97757', padding: 16, borderRadius: 8, flex: 1 }}
             >
-              <Text style={{ color: 'white', textAlign: 'center', fontWeight: '600' }}>
+              <Text style={{ color: '#faf9f5', textAlign: 'center', fontWeight: '600' }}>
                 {editingClient ? 'Update' : 'Save'}
               </Text>
             </TouchableOpacity>

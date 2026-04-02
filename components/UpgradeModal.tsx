@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useAuth } from '@/context/AuthContext';
 import { PaymentService } from '@/lib/payments';
+import { APP_NAME } from '../src/constants/BrandConfig';
 
 interface UpgradeModalProps {
   visible: boolean;
@@ -103,7 +104,7 @@ export default function UpgradeModal({ visible, onClose, onUpgradeSuccess }: Upg
               <Text style={{ fontSize: 32, color: 'white' }}>🥕</Text>
             </View>
             <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 8 }}>
-              CarrotCash Pro
+              {APP_NAME} Pro
             </Text>
             <Text style={{ fontSize: 16, color: '#666', textAlign: 'center' }}>
               Unlock unlimited clients and premium features

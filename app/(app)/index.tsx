@@ -204,7 +204,7 @@ export default function ClientList() {
             
             <TouchableOpacity 
               style={styles.quickActionCard}
-              onPress={() => router.push('/(app)/create-invoice')}
+              onPress={() => router.push('/invoice/create')}
             >
               <BlurView intensity={15} tint="dark" style={styles.quickActionBlur}>
                 <Text style={styles.quickActionTitle}>Create Invoice</Text>

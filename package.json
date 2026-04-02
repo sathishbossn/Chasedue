@@ -1,5 +1,5 @@
 {
-  "name": "CarrotCash",
+  "name": "FlowFinance",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
@@ -7,35 +7,50 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build": "npx expo export",
+    "build": "npx expo export:web",
+    "build:static": "npx expo export:web --output-dir dist",
     "serve": "npx serve -s dist -l 3000",
+    "deploy:vercel": "npm run build:static && vercel --prod",
     "confirm-users": "node scripts/confirmUsers.js"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^2.2.0",
+    "@expo-google-fonts/lora": "^0.4.2",
+    "@expo-google-fonts/poppins": "^0.4.1",
+    "@react-native-async-storage/async-storage": "2.2.0",
     "@stripe/stripe-js": "^8.9.0",
     "@supabase/supabase-js": "^2.98.0",
     "clsx": "^2.1.1",
     "dotenv": "^17.3.1",
-    "expo": "~55.0.4",
-    "expo-blur": "~55.0.8",
-    "expo-constants": "~55.0.7",
-    "expo-linear-gradient": "~55.0.8",
-    "expo-linking": "~55.0.7",
-    "expo-router": "~55.0.4",
-    "expo-secure-store": "~55.0.8",
+    "expo": "~55.0.9",
+    "expo-auth-session": "~55.0.10",
+    "expo-blur": "~55.0.10",
+    "expo-constants": "~55.0.9",
+    "expo-font": "~55.0.4",
+    "expo-haptics": "~55.0.9",
+    "expo-linear-gradient": "~55.0.9",
+    "expo-linking": "~55.0.9",
+    "expo-print": "~55.0.9",
+    "expo-router": "~55.0.8",
+    "expo-secure-store": "~55.0.9",
+    "expo-sharing": "~55.0.14",
     "expo-status-bar": "~55.0.4",
+    "expo-web-browser": "~55.0.10",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^0.577.0",
     "lucide-react-native": "^0.575.0",
     "nativewind": "^4.2.2",
     "razorpay": "^2.9.6",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-native": "0.83.2",
+    "react-native-gesture-handler": "^2.30.0",
     "react-native-safe-area-context": "~5.6.2",
     "react-native-screens": "~4.23.0",
+    "react-native-svg": "15.11.2",
     "react-native-url-polyfill": "^3.0.0",
     "react-native-web": "^0.21.0",
-    "react-native-webview": "^13.16.1",
+    "react-native-webview": "13.16.0",
+    "react-native-worklets-core": "^1.6.3",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^3.4.19"
   },
@@ -47,5 +62,12 @@
     "serve": "^14.2.6",
     "typescript": "~5.9.2"
   },
-  "private": true
+  "private": true,
+  "expo": {
+    "install": {
+      "exclude": [
+        "react-native-svg"
+      ]
+    }
+  }
 }

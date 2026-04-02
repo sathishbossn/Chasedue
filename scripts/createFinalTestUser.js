@@ -1,8 +1,12 @@
 // scripts/createFinalTestUser.js
 import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
 
-const supabaseUrl = 'https://idjtdmsdkwupwwxacynt.supabase.co';
-const serviceRoleKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkanRkbXNka3d1cHd3eGFjeW50Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjQyNDQ2MSwiZXhwIjoyMDg4MDAwNDYxfQ.AlsoO8kLla3XksfufG3aLY0V95A4gC6i2tjUkvnmZjg';
+// Load environment variables
+dotenv.config({ path: '../.env' });
+
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 const supabase = createClient(supabaseUrl, serviceRoleKey, {
   auth: { persistSession: false },
