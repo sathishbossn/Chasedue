@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarrotCash - Built for Indian Freelancers</title>
+    <link rel="icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: #FFFFFF;
+            color: #374151;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 48px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #111827;
+            letter-spacing: -0.5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo-accent {
+            color: #ED13C4;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-link {
+            font-size: 15px;
+            color: #6B7280;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .get-started-btn {
+            background: #ED13C4;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #FFFFFF;
+            padding: 80px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-gradient {
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: rgba(237, 19, 196, 0.08);
+            z-index: 1;
+        }
+
+        .hero-gradient-2 {
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(237, 19, 196, 0.05);
+            z-index: 1;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 64px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-left {
+            flex: 1;
+            max-width: 560px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FDF0FB;
+            border: 1px solid rgba(237, 19, 196, 0.2);
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ED13C4;
+        }
+
+        .badge-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ED13C4;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-title {
+            font-size: 60px;
+            font-weight: 800;
+            color: #111827;
+            line-height: 70px;
+            letter-spacing: -2.5px;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-title .accent {
+            color: #ED13C4;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #6B7280;
+            line-height: 30px;
+            margin-bottom: 36px;
+            font-family: 'Lora', serif;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .btn-primary {
+            background: #ED13C4;
+            color: #fff;
+            padding: 16px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-secondary {
+            border: 1.5px solid #D1D5DB;
+            color: #374151;
+            padding: 16px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Features Intro */
+        .features-intro {
+            text-align: center;
+            padding: 80px 48px;
+            background: #FAF9F5;
+        }
+
+        .features-tag {
+            font-size: 14px;
+            color: #ED13C4;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .features-title {
+            font-size: 42px;
+            font-weight: 800;
+            color: #111827;
+            text-align: center;
+            line-height: 52px;
+            letter-spacing: -1.5px;
+            margin-bottom: 48px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Bento Grid */
+        .bento-section {
+            padding: 80px 48px;
+            background: #FFFFFF;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .bento-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .bento-large {
+            grid-row: span 2;
+            min-height: 400px;
+        }
+
+        .bento-small {
+            min-height: 180px;
+        }
+
+        .bento-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: #FDF0FB;
+            border: 1px solid rgba(237, 19, 196, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .bento-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: #ED13C4;
+        }
+
+        .bento-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .bento-desc {
+            font-size: 15px;
+            color: #6B7280;
+            line-height: 24px;
+            margin-bottom: 20px;
+            font-family: 'Lora', serif;
+        }
+
+        .bento-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .bento-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bento-feature svg {
+            width: 16px;
+            height: 16px;
+            fill: #ED13C4;
+        }
+
+        .bento-feature-text {
+            font-size: 14px;
+            color: #374151;
+            font-weight: 500;
+            font-family: 'Lora', serif;
+        }
+
+        /* Pricing */
+        .pricing-section {
+            padding: 80px 48px;
+            background: #FAF9F5;
+            text-align: center;
+        }
+
+        .pricing-title {
+            font-size: 42px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .pricing-sub {
+            font-size: 18px;
+            color: #6B7280;
+            margin-bottom: 48px;
+            font-family: 'Lora', serif;
+        }
+
+        .pricing-cards {
+            display: flex;
+            gap: 32px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            flex: 1;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-card.pro {
+            border: 2px solid #ED13C4;
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            background: #ED13C4;
+            padding: 6px 16px;
+            border-radius: 100px;
+        }
+
+        .pricing-badge-text {
+            font-size: 12px;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .pricing-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .pricing-card-price {
+            font-size: 48px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .pricing-card-period {
+            font-size: 18px;
+            font-weight: 400;
+            color: #6B7280;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .pricing-card-desc {
+            font-size: 14px;
+            color: #6B7280;
+            line-height: 22px;
+            margin-bottom: 24px;
+            font-family: 'Lora', serif;
+        }
+
+        .pricing-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .pricing-feature svg {
+            width: 16px;
+            height: 16px;
+            fill: #ED13C4;
+        }
+
+        .pricing-feature-text {
+            font-size: 14px;
+            color: #374151;
+            font-weight: 500;
+            font-family: 'Lora', serif;
+        }
+
+        .btn-pricing-free {
+            border: 1.5px solid #D1D5DB;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 15px;
+            color: #374151;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            display: block;
+        }
+
+        .btn-pricing-pro {
+            background: #ED13C4;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 15px;
+            color: #fff;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            display: block;
+        }
+
+        /* Stats */
+        .stats-strip {
+            background: #111827;
+            color: #fff;
+            padding: 56px 48px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+            padding: 0 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            font-size: 44px;
+            font-weight: 800;
+            color: #ED13C4;
+            letter-spacing: -2px;
+            margin-bottom: 6px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0D0D1A;
+            color: #fff;
+            padding: 56px 48px 32px;
+        }
+
+        .footer-top {
+            display: flex;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand {
+            flex: 2;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-tag {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 22px;
+            margin-bottom: 20px;
+            font-family: 'Lora', serif;
+        }
+
+        .footer-col {
+            flex: 1;
+        }
+
+        .footer-col h3 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-link {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            font-family: 'Lora', serif;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding-top: 24px;
+        }
+
+        .footer-copy, .footer-made {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.25);
+            font-family: 'Lora', serif;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .hero-title {
+                font-size: 40px;
+                line-height: 50px;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .bento-large {
+                min-height: 300px;
+            }
+
+            .pricing-cards {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .pricing-card.pro {
+                transform: scale(1);
+            }
+
+            .stats-strip {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .stat-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 20px 0;
+            }
+
+            .stat-item:last-child {
+                border-bottom: none;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                gap: 36px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Carrot<span class="logo-accent">Cash</span></div>
+        <div class="nav-links">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#pricing" class="nav-link">Pricing</a>
+            <a href="#blog" class="nav-link">Blog</a>
+            <a href="#support" class="nav-link">Support</a>
+        </div>
+        <a href="#pricing" class="get-started-btn">Get Started</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-gradient"></div>
+        <div class="hero-gradient-2"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="badge">
+                        <div class="badge-dot"></div>
+                        <span class="badge-text">Built for Indian Solopreneurs</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Stop Chasing.<br>
+                        <span class="accent">Start Getting</span><br>
+                        Paid.
+                    </h1>
+                    <p class="hero-subtitle">
+                        Create GST-compliant invoices, send them via WhatsApp, and get paid 3× faster. Built for Indian freelancers who value their time.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#pricing" class="btn-primary">Start Free Trial</a>
+                        <a href="#features" class="btn-secondary">See Features</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Intro -->
+    <section class="features-intro">
+        <div class="container">
+            <div class="features-tag">The features you need. All in one place.</div>
+            <h2 class="features-title">Everything a freelancer needs to get paid on time</h2>
+        </div>
+    </section>
+
+    <!-- Bento Grid Features -->
+    <section class="bento-section" id="features">
+        <div class="bento-grid">
+            <!-- Large Invoicing Card -->
+            <div class="bento-card bento-large">
+                <div class="bento-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+                        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                    </svg>
+                </div>
+                <h3 class="bento-title">Invoicing</h3>
+                <p class="bento-desc">
+                    Professional GST-compliant invoices that auto-calculate CGST, SGST & IGST based on your client's state.
+                </p>
+                <div class="bento-features">
+                    <div class="bento-feature">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                        </svg>
+                        <span class="bento-feature-text">Unlimited GST invoices</span>
+                    </div>
+                    <div class="bento-feature">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                        </svg>
+                        <span class="bento-feature-text">Auto CGST/SGST calculation</span>
+                    </div>
+                    <div class="bento-feature">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                        </svg>
+                        <span class="bento-feature-text">HSN & SAC codes</span>
+                    </div>
+                    <div class="bento-feature">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                        </svg>
+                        <span class="bento-feature-text">PDF export ready</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WhatsApp Delivery Card -->
+            <div class="bento-card bento-small">
+                <div class="bento-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                </div>
+                <h3 class="bento-title">WhatsApp Delivery</h3>
+                <p class="bento-desc">
+                    Send invoices directly to WhatsApp where clients actually respond.
+                </p>
+            </div>
+
+            <!-- Real-time Analytics Card -->
+            <div class="bento-card bento-small">
+                <div class="bento-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 13h2v8H3zm4-8h2v16H7zm4-2h2v18h-2zm4 4h2v14h-2zm4-2h2v16h-2z"/>
+                    </svg>
+                </div>
+                <h3 class="bento-title">Real-time Analytics</h3>
+                <p class="bento-desc">
+                    Live dashboard showing revenue, expenses, and net profit in real-time.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <h2 class="pricing-title">Simple, transparent pricing</h2>
+            <p class="pricing-sub">Start free, scale as you grow</p>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3 class="pricing-card-title">Starter</h3>
+                    <div class="pricing-card-price">Free</div>
+                    <p class="pricing-card-desc">Perfect for freelancers just getting started</p>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            </svg>
+                            <span class="pricing-feature-text">Unlimited invoices</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            </svg>
+                            <span class="pricing-feature-text">5 clients</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            </svg>
+                            <span class="pricing-feature-text">Basic analytics</span>
+                        </div>
+                    </div>
+                    <a href="https://lemonsqueezy.com" class="btn-pricing-free">Get Started</a>
+                </div>
+                
+                <div class="pricing-card pro">
+                    <div class="pricing-badge">
+                        <span class="pricing-badge-text">Most Popular</span>
+                    </div>
+                    <h3 class="pricing-card-title">Professional</h3>
+                    <div class="pricing-card-price">₹299<span class="pricing-card-period">/month</span></div>
+                    <p class="pricing-card-desc">For growing freelancers who need more power</p>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            </svg>
+                            <span class="pricing-feature-text">Everything in Starter</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            </svg>
+                            <span class="pricing-feature-text">Unlimited clients</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            </svg>
+                            <span class="pricing-feature-text">WhatsApp delivery</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            </svg>
+                            <span class="pricing-feature-text">Advanced analytics</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            </svg>
+                            <span class="pricing-feature-text">Priority support</span>
+                        </div>
+                    </div>
+                    <a href="https://lemonsqueezy.com" class="btn-pricing-pro">Start Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <section class="stats-strip">
+        <div class="stat-item">
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Active freelancers</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">₹4Cr+</div>
+            <div class="stat-label">Revenue tracked</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">3×</div>
+            <div class="stat-label">Faster payments</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">10 hrs</div>
+            <div class="stat-label">Saved per month</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">Carrot<span class="logo-accent">Cash</span></div>
+                    <p class="footer-tag">Built for Indian freelancers.<br>With ❤️ from Chennai.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Product</h3>
+                    <a href="#features" class="footer-link">Features</a>
+                    <a href="#pricing" class="footer-link">Pricing</a>
+                    <a href="#templates" class="footer-link">Templates</a>
+                    <a href="#integrations" class="footer-link">Integrations</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <a href="#about" class="footer-link">About</a>
+                    <a href="#blog" class="footer-link">Blog</a>
+                    <a href="#careers" class="footer-link">Careers</a>
+                    <a href="#contact" class="footer-link">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <a href="#help" class="footer-link">Help Centre</a>
+                    <a href="#whatsapp" class="footer-link">WhatsApp Support</a>
+                    <a href="#status" class="footer-link">Status Page</a>
+                    <a href="#privacy" class="footer-link">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">© 2026 CarrotCash. All rights reserved. Built by A. Sathish Kumar</div>
+                <div class="footer-made">🇮🇳 Made in India</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
