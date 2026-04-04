@@ -1,24 +1,137 @@
-# Anthropic Brand & Style Rules
+# Project Rules — CarrotCash + Anthropic Brand
 
-## 1. Core Visual Identity
-When generating UI components, artifacts, or styling (CSS/Tailwind/Python-pptx), always apply these hex codes:
+---
 
+## SECTION 1: Anthropic Brand & Style Rules
+*(Apply when generating UI components, artifacts, CSS, or presentations)*
+
+### Core Visual Identity
 * **Primary Palette:**
-    * Dark: `#141413` (Text/Dark Backgrounds)
-    * Light: `#faf9f5` (Light Backgrounds/Inverted Text)
-    * Mid Gray: `#b0aea5` (Secondary/Borders)
-    * Light Gray: `#e8e6dc` (Subtle UI elements)
+    * Dark: `#141413`
+    * Light: `#faf9f5`
+    * Mid Gray: `#b0aea5`
+    * Light Gray: `#e8e6dc`
 * **Accent Palette:**
     * Primary: `#d97757` (Orange)
     * Secondary: `#6a9bcc` (Blue)
     * Tertiary: `#788c5d` (Green)
 
-## 2. Typography Constraints
-Enforce the following font stack in all styling tasks:
-* **Headings (24pt+):** `Poppins`, fallback to `Arial`.
-* **Body Text:** `Lora`, fallback to `Georgia`.
+### Typography
+* **Headings (24pt+):** `Poppins`, fallback `Arial`
+* **Body Text:** `Lora`, fallback `Georgia`
 
-## 3. Implementation Logic
-* **Contextual Coloring:** Automatically select text colors (Dark/Light) based on background contrast.
-* **Shape Styling:** Use the Accent Palette (Orange/Blue/Green) for non-text elements and icons.
-* **Python-pptx:** When generating presentations, use the `RGBColor` class with the specific hex values provided above.
+### Implementation Logic
+* Contextual text colors based on background contrast
+* Accent palette for non-text elements and icons
+* Python-pptx: use `RGBColor` with hex values above
+
+---
+
+## SECTION 2: CarrotCash Project Rules
+*(Apply when working on the CarrotCash codebase)*
+
+### Project Overview
+CarrotCash is a micro-SaaS invoice and finance tracker
+built for Indian freelancers and solopreneurs.
+
+### Tech Stack
+- Framework: React Native + Expo (SDK 55)
+- Router: Expo Router (file-based)
+- Backend: Supabase (auth + database + RLS)
+- Language: TypeScript
+- Styling: StyleSheet (React Native) + inline styles for web
+- State: React hooks (useState, useEffect, useContext)
+- Auth: Supabase Google OAuth 2.0
+- Storage: AsyncStorage for session persistence
+- PDF: html2pdf.js (web)
+- Analytics: Mixpanel
+
+### Supabase Rules
+- Auth: autoRefreshToken: true, persistSession: true
+- Storage: AsyncStorage
+- ALWAYS call getValidSession() before any Supabase query
+- NEVER query Supabase without a valid session guard
+- Tables: invoices, clients, expenses, profiles, subscriptions
+- All tables have RLS enabled with user_id policies
+
+### Auth Rules
+- Session helper: lib/supabase.ts → getValidSession()
+- AuthContext: context/AuthContext.tsx
+- ALWAYS use session.user.id for user_id in inserts
+- clients table requires: name, user_id, freelancer_id (= user_id)
+- On SIGNED_OUT redirect to /login
+- Use .maybeSingle() NOT .single() to avoid 406 errors
+
+### File Structure
+
+
+
+### CarrotCash Design System
+- Primary color: #ED13C4 (pink accent)
+- Font: Clash Display (headings) + Bricolage Grotesque (body)
+- Theme: Light with glassmorphism
+- Cards: rgba(255,255,255,0.5) + backdrop-filter: blur(16px)
+- Border: 1px solid rgba(255,255,255,0.6)
+
+### Business Logic
+- GST: 18% default (CGST + SGST or IGST by location)
+- Multi-currency: INR ₹ and USD $
+- Invoice format: INV-YYYYMM-XXX
+- clients.freelancer_id = session.user.id always
+
+### Code Style
+- TypeScript strictly
+- Functional components only
+- Always handle loading + error states
+- async/await only, no .then()
+- Console.log with emoji prefixes:
+  ✅ Success  ❌ Error  🔄 Loading  🔍 Debug
+
+### What NOT To Do
+- Never use .single() → use .maybeSingle()
+- Never hardcode user IDs
+- Never skip session guard before queries
+- Never change RLS policies without asking
+- Never touch DB schema without confirming
+- Never use localStorage (not supported in Expo)
+- Never install packages without npx expo install
+
+---
+
+## SECTION 3: High-End UI/UX Design Constraints (Mandatory)
+*(Apply when creating or updating any UI components)*
+
+### Visual Language & Glassmorphism
+- **Linear Gradient Cards:** MUST use `LinearGradient` from `expo-linear-gradient` for all card backgrounds
+- **Defrost Components:** Implement `backdrop-filter: blur(16px) saturate(180%)` for premium depth
+- **Tactile Edges:** Use 1px solid border with 10% white opacity (`rgba(255,255,255,0.1)`)
+
+### Animation Engine (Reanimated + Gestures)
+- **Smooth Entrance:** Every screen MUST have fade + slight scale up entrance animation
+- **Interactive Gestures:** Use `react-native-gesture-handler` for modals and drag-to-dismiss
+- **Layout Transitions:** Use Shared Element Transitions for screen navigation
+
+### Bento Grid Layout Logic
+- **Modular Design:** MUST use Bento Grid for dashboard features to ensure scannability
+- **Visual Hierarchy:** Most important data (Total Revenue) gets largest box (2x2 or 3x2)
+- **Compartmentalization:** Maintain strict visual boundaries between boxes
+
+### Machine Experience (MX) UI
+- **Activity Status:** Show "Machine Learning Prediction" or "Agent Activity" instead of loading spinners
+- **Immediate Feedback:** Provide visual feedback (isAutoSet toggles) when agent modifies data
+
+### Technical Requirements
+- **Stack:** Expo SDK 55, Expo Router, NativeWind v5, Reanimated v3
+- **Performance:** Use `FlatList` with optimized `renderItem` for financial lists
+- **State:** Manage persistent UI states with React Context + AsyncStorage
+
+### Current Status (April 2026)
+- ✅ Auth (Google OAuth, JWT refresh working)
+- ✅ Invoices (create, list, PDF export)
+- ✅ Clients (create, list)
+- ✅ Landing page (glassmorphism light theme)
+- 🔄 Expenses (UI exists, needs CRUD)
+- 🔄 Dashboard stats (₹ totals need fixing)
+- 🔄 WhatsApp integration (in progress)
+- ❌ Payment gateway (Stripe/Razorpay)
+- ❌ Subscriptions
