@@ -4,7 +4,7 @@ import { CheckCircle, MessageSquare, BarChart3, FileText, ArrowRight } from 'luc
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
+      {/* Navigation - Updated Next.js Version */}
       <nav className="flex justify-between items-center px-12 py-4 bg-white border-b border-gray-200">
         <div className="text-2xl font-bold text-navy" style={{ fontFamily: 'Poppins', letterSpacing: '-0.5px' }}>
           Carrot<span className="text-primary">Cash</span>
