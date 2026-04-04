@@ -1,32 +1,33 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./app/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
-  presets: [require('nativewind/preset')],
-  darkMode: 'class',
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
     extend: {
       colors: {
-        // Brand Colors from .windsurfrules
-        'brand-dark': '#141413',
-        'brand-light': '#faf9f5',
-        'brand-mid': '#b0aea5',
-        'brand-light-gray': '#e8e6dc',
-        'brand-primary': '#d97757',
-        'brand-secondary': '#6a9bcc',
-        'brand-tertiary': '#788c5d',
-        // Semantic aliases
-        primary: '#d97757',
-        secondary: '#6a9bcc',
-        tertiary: '#788c5d',
-        dark: '#141413',
-        light: '#faf9f5',
+        primary: '#ED13C4',
+        'primary-light': '#FDF0FB',
+        'primary-border': 'rgba(237,19,196,0.2)',
+        navy: '#111827',
+        text: '#374151',
+        'text-mid': '#6B7280',
+        'text-light': '#9CA3AF',
+        border: '#E5E7EB',
+        'border-mid': '#D1D5DB',
+        bg: '#FFFFFF',
+        'bg-cream': '#FAF9F5',
+        'bg-warm': '#F7F4EE',
+        'bg-section': '#F4F2EC',
       },
       fontFamily: {
-        heading: ['Poppins_700Bold', 'Poppins_400Regular'],
-        body: ['Lora_400Regular'],
+        'poppins': ['Poppins', 'sans-serif'],
+        'lora': ['Lora', 'serif'],
       },
     },
   },
   plugins: [],
-};
-
+}
