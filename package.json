@@ -1,40 +1,25 @@
 {
-  "name": "CarrotCash",
-  "version": "1.0.0",
-  "main": "expo-router/entry",
+  "name": "carrotcash-landing",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "expo": "expo start --web",
-    "expo:build": "npx expo export:web",
-    "expo:serve": "npx serve -s dist -l 3000"
+    "lint": "next lint"
   },
   "dependencies": {
-    "next": "15.1.6",
-    "react": "^18",
-    "react-dom": "^18",
-    "lucide-react": "^0.577.0",
-    "tailwindcss": "^3.4.19",
-    "@expo-google-fonts/lora": "^0.4.2",
-    "@expo-google-fonts/poppins": "^0.4.1",
-    "clsx": "^2.1.1",
-    "expo": "~55.0.11",
-    "expo-router": "~55.0.10",
-    "react-native": "0.83.4",
-    "react-native-web": "^0.21.0",
-    "framer-motion": "^12.38.0"
+    "next": "15.2.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "15.1.6",
-    "postcss": "^8",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "typescript": "^5",
-    "@babel/core": "^7.29.0",
-    "babel-preset-expo": "^55.0.10"
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8",
+    "autoprefixer": "^10.0.1"
   }
 }
