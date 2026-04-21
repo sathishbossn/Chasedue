@@ -1,149 +1,153 @@
+'use client'
+
 import { CheckCircle, MessageSquare, Clock, TrendingUp, Zap } from 'lucide-react'
+import ScrollSlideUp from '@/components/landing/scroll-slide-up'
 
 export default function BenefitsSection() {
   return (
-    <section className="section bg-gradient-to-br from-brand-50 via-white to-accent-light">
-      <div className="container">
-        <div className="text-center mb-20">
-          <div className="eyebrow mx-auto">The Switch That Changes Everything</div>
-          <h2 className="section-title max-w-3xl mx-auto text-balance">
-            Why Indian freelancers are switching from email invoices to WhatsApp
+    <section className="section relative overflow-hidden border-t border-white/[0.06] bg-[#010101]">
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#F97316]/[0.06] via-transparent to-transparent"
+        aria-hidden
+      />
+      <div className="container relative">
+        <ScrollSlideUp className="mb-20 text-center">
+          <div className="eyebrow mx-auto">Proof, not promises</div>
+          <h2 className="section-title mx-auto max-w-3xl text-balance">
+            Why freelancers switch from inbox invoices to ChaseDue on WhatsApp
           </h2>
-          <p className="hero-subtitle mx-auto text-pretty max-w-2xl">
-            Email invoices get lost in crowded inboxes. WhatsApp gets seen, read, and paid.
+          <p className="hero-subtitle mx-auto mt-4 max-w-2xl text-pretty text-slate-400">
+            Email gets buried. WhatsApp gets read. ChaseDue turns that habit into predictable cash flow.
           </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+        </ScrollSlideUp>
+
+        <div className="mb-20 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {[
             {
               num: '3×',
-              label: 'Faster Payments',
-              desc: 'WhatsApp reminders get paid 3× faster than email',
-              icon: <Zap className="w-5 h-5" />
+              label: 'Faster payments',
+              desc: 'Reminders clients actually see beat polite email pings.',
+              icon: <Zap className="h-5 w-5" />,
             },
             {
               num: '95%',
-              label: 'Message Seen Rate',
-              desc: 'vs 22% for email invoices',
-              icon: <MessageSquare className="w-5 h-5" />
+              label: 'Seen on WhatsApp',
+              desc: 'Versus single-digit reply rates on cold invoice emails.',
+              icon: <MessageSquare className="h-5 w-5" />,
             },
             {
               num: '15 hrs',
-              label: 'Time Saved Weekly',
-              desc: 'No more manual follow-ups and payment chasing',
-              icon: <Clock className="w-5 h-5" />
+              label: 'Saved weekly',
+              desc: 'Less chasing, fewer threads, more billable time.',
+              icon: <Clock className="h-5 w-5" />,
             },
             {
               num: '89%',
-              label: 'On-Time Payments',
-              desc: 'Professional GST invoices get paid when due',
-              icon: <TrendingUp className="w-5 h-5" />
-            }
+              label: 'On-time',
+              desc: 'Professional GST PDFs + nudges that don’t feel spammy.',
+              icon: <TrendingUp className="h-5 w-5" />,
+            },
           ].map((benefit, i) => (
-            <div key={i} className="text-center group">
-              <div className="w-16 h-16 bg-brand-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <div className="text-brand-600">
-                  {benefit.icon}
+            <ScrollSlideUp key={i} delay={i * 0.06}>
+              <div className="group h-full text-center">
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-xl border border-[#F97316]/20 bg-[#F97316]/10 backdrop-blur-xl transition-transform duration-300 group-hover:scale-105">
+                  <div className="text-[#F97316]">{benefit.icon}</div>
                 </div>
+                <div className="mb-3 font-display text-5xl font-black text-gradient">{benefit.num}</div>
+                <div className="mb-2 font-display text-lg font-bold text-white">{benefit.label}</div>
+                <div className="text-sm leading-relaxed text-slate-400">{benefit.desc}</div>
               </div>
-              <div className="text-5xl font-display font-black text-gradient mb-3">
-                {benefit.num}
-              </div>
-              <div className="text-lg font-display font-bold text-primary mb-2">
-                {benefit.label}
-              </div>
-              <div className="text-sm text-muted leading-relaxed">
-                {benefit.desc}
-              </div>
-            </div>
+            </ScrollSlideUp>
           ))}
         </div>
-        
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
+
+        <div className="grid items-center gap-16 lg:grid-cols-2">
+          <ScrollSlideUp className="space-y-8">
             <div className="space-y-4">
-              <h3 className="text-3xl font-display font-bold text-primary">
+              <h3 className="font-display text-3xl font-bold text-white">
                 Stop the email chase. Start the WhatsApp conversation.
               </h3>
-              <p className="text-body text-pretty">
-                You're spending hours each week sending follow-up emails that never get read. 
-                Your clients are busy, their inbox is crowded, and your invoice is just another email 
-                in a sea of promotions.
+              <p className="text-body text-pretty text-slate-300">
+                You’re not bad at collections—your channel is. ChaseDue meets clients where they already reply, with
+                invoices that look as serious as your work.
               </p>
             </div>
-            
+
             <div className="space-y-6">
-              <div className="flex items-start space-x-4 p-4 rounded-xl bg-red-50 border border-red-100">
-                <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <MessageSquare className="w-4 h-4 text-red-600" />
+              <div className="glass-panel flex items-start gap-4 rounded-2xl border border-red-500/20 bg-red-500/[0.06] p-4 backdrop-blur-xl">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-500/20">
+                  <MessageSquare className="h-4 w-4 text-red-400" />
                 </div>
-                <div className="space-y-2">
-                  <h4 className="font-display font-bold text-red-900">The Email Problem</h4>
-                  <p className="text-sm text-red-700">
-                    22% open rate, 3% response rate, endless follow-ups, delayed payments
+                <div className="space-y-1">
+                  <h4 className="font-display font-bold text-red-200">The inbox problem</h4>
+                  <p className="text-sm text-slate-400">
+                    Low opens, slower replies, and “following up” that eats your week.
                   </p>
                 </div>
               </div>
-              
-              <div className="flex items-center space-x-2">
-                <div className="w-12 h-0.5 bg-border"></div>
-                <span className="text-sm font-display font-bold text-muted uppercase tracking-wider">VS</span>
-                <div className="w-12 h-0.5 bg-border"></div>
+
+              <div className="flex items-center gap-2">
+                <div className="h-px flex-1 bg-white/10" />
+                <span className="font-display text-xs font-bold uppercase tracking-wider text-slate-500">vs</span>
+                <div className="h-px flex-1 bg-white/10" />
               </div>
-              
-              <div className="flex items-start space-x-4 p-4 rounded-xl bg-green-50 border border-green-100">
-                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <MessageSquare className="w-4 h-4 text-green-600" />
+
+              <div className="glass-panel flex items-start gap-4 rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.06] p-4 backdrop-blur-xl">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-500/20">
+                  <MessageSquare className="h-4 w-4 text-emerald-400" />
                 </div>
-                <div className="space-y-2">
-                  <h4 className="font-display font-bold text-green-900">The ChaseDue Solution</h4>
-                  <p className="text-sm text-green-700">
-                    95% seen rate, instant responses, smart reminders, 3× faster payments
+                <div className="space-y-1">
+                  <h4 className="font-display font-bold text-emerald-200">ChaseDue on WhatsApp</h4>
+                  <p className="text-sm text-slate-400">
+                    High visibility, polite automation, and GST-ready PDFs in one flow.
                   </p>
                 </div>
               </div>
             </div>
-            
+
             <div className="space-y-4">
-              <h4 className="font-display font-bold text-primary">What makes ChaseDue different:</h4>
+              <h4 className="font-display font-bold text-white">What you get out of the box</h4>
               <div className="space-y-3">
                 {[
-                  'Instant WhatsApp delivery with read receipts',
-                  'Smart timing based on client payment patterns',
-                  'Polite automated follow-ups that feel personal',
-                  'GST-compliant invoices that look professional',
-                  'Real-time payment tracking and cash-flow insights'
+                  'Instant WhatsApp delivery with read-friendly formatting',
+                  'GST lines that match how Indian clients expect to review bills',
+                  'Polite scheduled nudges—no manual “just circling back”',
+                  'Dashboard for who’s paid, who’s late, and what’s next',
                 ].map((point, i) => (
-                  <div key={i} className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <CheckCircle className="w-3 h-3 text-brand-600" />
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F97316]/15">
+                      <CheckCircle className="h-3.5 w-3.5 text-[#F97316]" />
                     </div>
-                    <span className="text-body">{point}</span>
+                    <span className="text-body text-slate-300">{point}</span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
-          
-          <div className="relative">
-            <div className="aspect-4-3 surface-floating rounded-2xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-100 via-white to-accent-light"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center space-y-6 p-8">
-                  <div className="w-20 h-20 bg-brand-500 rounded-2xl flex items-center justify-center animate-pulse-glow">
-                    <MessageSquare className="w-10 h-10 text-white" />
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-3xl font-display font-black text-primary">95%</div>
-                    <div className="text-sm font-semibold text-brand-600 uppercase tracking-wider">Message Seen Rate</div>
-                    <div className="text-xs text-muted">vs 22% for traditional email invoices</div>
-                    <div className="text-xs font-bold text-brand-600 mt-2">That's 4.3× better visibility</div>
+          </ScrollSlideUp>
+
+          <ScrollSlideUp delay={0.08}>
+            <div className="relative">
+              <div className="glass-panel aspect-4-3 overflow-hidden rounded-2xl border border-white/10 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.9)] backdrop-blur-xl animate-float">
+                <div
+                  className="absolute inset-0 bg-gradient-to-br from-[#F97316]/15 via-[#0a0a0a] to-[#121212]"
+                  aria-hidden
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="space-y-6 p-8 text-center">
+                    <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-xl bg-[#F97316]/20 ring-1 ring-[#F97316]/30 animate-pulse-glow">
+                      <MessageSquare className="h-10 w-10 text-[#F97316]" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="font-display text-3xl font-black text-white">95%</div>
+                      <div className="text-sm font-semibold uppercase tracking-wider text-[#F97316]">Seen rate</div>
+                      <div className="text-xs text-slate-500">vs. easy-to-ignore email threads</div>
+                      <div className="mt-2 text-xs font-bold text-[#F97316]">4×+ better surface area for payment</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollSlideUp>
         </div>
       </div>
     </section>

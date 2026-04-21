@@ -1,4 +1,4 @@
-export const APP_NAME = 'CarrotCash';
+export const APP_NAME = 'ChaseDue';
 
 export const BRAND_COLORS = {
   PRIMARY: '#FF006E',

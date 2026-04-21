@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,75 +8,80 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Premium rose-based palette for ChaseDue
-        rose: {
-          50: '#fff1f2',
-          100: '#ffe4e6',
-          200: '#fecdd3',
-          300: '#fda4af',
-          400: '#fb7185',
-          500: '#f43f5e',
-          600: '#e11d48',
-          700: '#be123c',
-          800: '#9f1239',
-          900: '#881337',
-          950: '#4c0519',
+        charcoal: {
+          DEFAULT: '#121212',
+          elevated: '#161616',
+          card: '#1a1a1a',
+          muted: '#1e1e1e',
         },
-        // Neutral grays with premium feel
-        gray: {
-          50: '#fafafa',
-          100: '#f5f5f5',
-          200: '#e5e5e5',
-          300: '#d4d4d4',
-          400: '#a3a3a3',
-          500: '#737373',
-          600: '#525252',
-          700: '#404040',
-          800: '#262626',
-          900: '#171717',
-          950: '#0a0a0a',
+        /** ChaseDue app shell (slate-900) */
+        shell: {
+          canvas: '#0F172A',
+          sidebar: '#0c1424',
         },
-        // Semantic colors
-        primary: '#f43f5e',
-        'primary-light': '#ffe4e6',
-        'primary-dark': '#be123c',
-        accent: '#8b5cf6',
-        'accent-light': '#ede9fe',
-        'accent-dark': '#6d28d9',
-        // Background colors
-        bg: '#ffffff',
-        'bg-subtle': '#fafafa',
-        'bg-muted': '#f5f5f5',
-        // Text colors
-        text: '#171717',
-        'text-muted': '#737373',
-        'text-subtle': '#a3a3a3',
-        // Border colors
-        border: '#e5e5e5',
-        'border-muted': '#d4d4d4',
+        // Brand orange — primary accent (#F97316)
+        brand: {
+          50: '#fff7ed',
+          100: '#ffedd5',
+          200: '#fed7aa',
+          300: '#fdba74',
+          400: '#fb923c',
+          500: '#F97316',
+          600: '#ea580c',
+          700: '#c2410c',
+          800: '#9a3412',
+          900: '#7c2d12',
+          950: '#431407',
+        },
+        // Soft slate — secondary text / UI chrome
+        'slate-soft': '#94A3B8',
+        primary: '#F97316',
+        'primary-light': '#ffedd5',
+        'primary-dark': '#c2410c',
+        muted: '#94A3B8',
+        subtle: '#161616',
+        border: 'rgba(255, 255, 255, 0.08)',
+        'border-strong': 'rgba(255, 255, 255, 0.12)',
+        accent: {
+          DEFAULT: '#fb923c',
+          light: 'rgba(251, 146, 60, 0.15)',
+          dark: '#ea580c',
+          foreground: '#fff7ed',
+        },
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         display: ['var(--font-display)', 'Georgia', 'serif'],
+        inter: ['var(--font-inter)', 'var(--font-sans)', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        lead: ['1.125rem', { lineHeight: '1.75rem', fontWeight: '400' }],
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '112': '28rem',
-        '128': '32rem',
+        18: '4.5rem',
+        88: '22rem',
+        112: '28rem',
+        128: '32rem',
       },
       borderRadius: {
-        'xl': '0.75rem',
-        '2xl': '1rem',
-        '3xl': '1.5rem',
+        DEFAULT: '10px',
+        sm: '8px',
+        md: '10px',
+        lg: '12px',
+        xl: '12px',
+        '2xl': '12px',
+        '3xl': '14px',
       },
       boxShadow: {
-        'premium': '0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
-        'premium-lg': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        'rose': '0 4px 6px -1px rgba(244, 63, 94, 0.1), 0 2px 4px -1px rgba(244, 63, 94, 0.06)',
+        border: '0 0 0 1px rgba(255, 255, 255, 0.06)',
+        soft: '0 1px 2px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06)',
+        card: '0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06)',
+        'card-hover':
+          '0 12px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(249, 115, 22, 0.2)',
+        glow: '0 0 0 1px rgba(249, 115, 22, 0.25), 0 8px 40px rgba(249, 115, 22, 0.2)',
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
+        float: 'float 6s ease-in-out infinite',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
       },
       keyframes: {
@@ -86,8 +90,8 @@ module.exports = {
           '50%': { transform: 'translateY(-10px)' },
         },
         'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(244, 63, 94, 0.3)' },
-          '50%': { boxShadow: '0 0 40px rgba(244, 63, 94, 0.5)' },
+          '0%, 100%': { boxShadow: '0 0 24px rgba(249, 115, 22, 0.35)' },
+          '50%': { boxShadow: '0 0 48px rgba(249, 115, 22, 0.5)' },
         },
       },
     },

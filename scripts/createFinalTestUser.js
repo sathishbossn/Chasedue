@@ -64,5 +64,5 @@ async function createFinalTestUser() {
   }
 }
 
-console.log('🚀 Creating Final Test User for CarrotCash');
+console.log('🚀 Creating Final Test User for ChaseDue');
 createFinalTestUser();

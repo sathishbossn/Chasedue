@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 36" role="img" aria-label="Lemon Squeezy">
+  <circle cx="14" cy="18" r="12" fill="#7047EB"/>
+  <path fill="#fff" d="M10 14h8v8h-8z" opacity=".25"/>
+  <text x="32" y="23" fill="#e8e4ff" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="15" font-weight="700">Lemon Squeezy</text>
+</svg>

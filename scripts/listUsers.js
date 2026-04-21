@@ -13,7 +13,7 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
 });
 
 async function listAllUsers() {
-  console.log('🔍 CarrotCash User Audit - Listing All Users');
+  console.log('🔍 ChaseDue User Audit - Listing All Users');
   console.log('==========================================');
   
   let page = 1;
@@ -110,5 +110,5 @@ async function listAllUsers() {
   }
 }
 
-console.log('🚀 Starting CarrotCash User Audit');
+console.log('🚀 Starting ChaseDue User Audit');
 listAllUsers();

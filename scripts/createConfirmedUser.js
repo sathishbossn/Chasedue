@@ -13,7 +13,7 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
 });
 
 async function createConfirmedUser(email, password) {
-  console.log(`🔧 CarrotCash User Creation - Creating: ${email}`);
+  console.log(`🔧 ChaseDue User Creation - Creating: ${email}`);
   console.log('==========================================');
   
   try {
@@ -85,7 +85,7 @@ async function createConfirmedUser(email, password) {
       console.log(`📊 Confirmation Status: ${isConfirmed ? '✅ CONFIRMED' : '❌ UNCONFIRMED'}`);
       
       if (isConfirmed) {
-        console.log(`🎉 User '${email}' is ready to use CarrotCash!`);
+        console.log(`🎉 User '${email}' is ready to use ChaseDue!`);
         console.log(`🔑 Login Credentials:`);
         console.log(`   Email: ${email}`);
         console.log(`   Password: ${password}`);
@@ -127,5 +127,5 @@ async function createConfirmedUser(email, password) {
 const newUserEmail = 'test8@carrotcash.com';
 const newUserPassword = 'password123';
 
-console.log('🚀 Starting CarrotCash User Creation Process');
+console.log('🚀 Starting ChaseDue User Creation Process');
 createConfirmedUser(newUserEmail, newUserPassword);

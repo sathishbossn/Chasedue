@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "CarrotCash",
-    "slug": "carrotcash",
+    "name": "ChaseDue",
+    "slug": "chasedue",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "com.sathish.carrotcash",
+    "scheme": "com.sathish.chasedue",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {

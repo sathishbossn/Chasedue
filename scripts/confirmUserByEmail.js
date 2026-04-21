@@ -13,7 +13,7 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
 });
 
 async function confirmUserByEmail(targetEmail) {
-  console.log(`🎯 CarrotCash User Confirmation - Target: ${targetEmail}`);
+  console.log(`🎯 ChaseDue User Confirmation - Target: ${targetEmail}`);
   console.log('================================================');
   
   try {
@@ -120,7 +120,7 @@ async function confirmUserByEmail(targetEmail) {
       console.log(`📊 Final Status: ${isNowConfirmed ? '✅ CONFIRMED' : '❌ STILL UNCONFIRMED'}`);
       
       if (isNowConfirmed) {
-        console.log(`🚀 User '${targetEmail}' can now log in to CarrotCash!`);
+        console.log(`🚀 User '${targetEmail}' can now log in to ChaseDue!`);
       }
     }
     
