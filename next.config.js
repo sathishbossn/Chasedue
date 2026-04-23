@@ -8,14 +8,26 @@ const nextConfig = {
    */
   devIndicators: false,
   productionBrowserSourceMaps: false,
+
+  /**
+   * Limit build concurrency to avoid WorkerError on Vercel free tier.
+   * Forces single-threaded compilation — stays within memory limits.
+   */
+  experimental: {
+    workerThreads: false,
+    cpus: 1,
+  },
+
   images: {
     unoptimized: true,
   },
+
   async redirects() {
     return [
       { source: '/features/collaboration', destination: '/features/clients', permanent: true },
     ]
   },
+
   /**
    * @react-pdf/renderer (pdfkit) may resolve optional native modules; stub them for server bundles.
    * @see https://github.com/diegomura/react-pdf/issues/1095
@@ -32,4 +44,5 @@ const nextConfig = {
     return config
   },
 }
+
 module.exports = nextConfig
