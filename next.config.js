@@ -5,19 +5,11 @@ const nextConfig = {
   devIndicators: false,
   productionBrowserSourceMaps: false,
 
-  /**
-   * Turbopack equivalent of webpack canvas/encoding stubs.
-   * Required for @react-pdf/renderer in Next.js 16.
-   */
-  turbopack: {
-    resolveAlias: {
-      canvas: './src/lib/shims/empty-module.js',
-      encoding: './src/lib/shims/empty-module.js',
-    },
-  },
+  // Tell Next.js 16: "I know I have webpack config, use Turbopack anyway"
+  turbopack: {},
 
   experimental: {
-    workerThreads: false,
+    
     cpus: 1,
   },
 
