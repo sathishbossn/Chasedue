@@ -10,6 +10,12 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
 
   /**
+   * Explicitly declare turbopack config (even if empty) to silence Next.js 16's
+   * "webpack config found but no turbopack config" WorkerError.
+   */
+  turbopack: {},
+
+  /**
    * Limit build concurrency to avoid WorkerError on Vercel free tier.
    * Forces single-threaded compilation — stays within memory limits.
    */
