@@ -2,23 +2,20 @@ const path = require('path')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /**
-   * Disables Next.js dev indicators (including stale-route / build-activity badges in `next dev`).
-   * Production (`next build` + `next start`, `NODE_ENV=production`) never shows these overlays.
-   */
   devIndicators: false,
   productionBrowserSourceMaps: false,
 
   /**
-   * Explicitly declare turbopack config (even if empty) to silence Next.js 16's
-   * "webpack config found but no turbopack config" WorkerError.
+   * Turbopack equivalent of webpack canvas/encoding stubs.
+   * Required for @react-pdf/renderer in Next.js 16.
    */
-  turbopack: {},
+  turbopack: {
+    resolveAlias: {
+      canvas: './src/lib/shims/empty-module.js',
+      encoding: './src/lib/shims/empty-module.js',
+    },
+  },
 
-  /**
-   * Limit build concurrency to avoid WorkerError on Vercel free tier.
-   * Forces single-threaded compilation — stays within memory limits.
-   */
   experimental: {
     workerThreads: false,
     cpus: 1,
@@ -34,10 +31,6 @@ const nextConfig = {
     ]
   },
 
-  /**
-   * @react-pdf/renderer (pdfkit) may resolve optional native modules; stub them for server bundles.
-   * @see https://github.com/diegomura/react-pdf/issues/1095
-   */
   webpack: (config, { isServer }) => {
     if (isServer) {
       const empty = path.join(__dirname, 'src', 'lib', 'shims', 'empty-module.js')
