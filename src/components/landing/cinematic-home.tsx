@@ -1245,6 +1245,7 @@ function Pricing() {
         <SecurePaymentsRow />
       </div>
     </section>
+    </>
   )
 }
 
