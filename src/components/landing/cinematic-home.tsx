@@ -92,6 +92,12 @@ function Nav() {
             <Link href="#faq" className="text-sm font-medium text-white/60 transition hover:text-white">
               FAQ
             </Link>
+            <Link href="/help" className="text-sm font-medium text-white/60 transition hover:text-white">
+              Help
+            </Link>
+            <Link href="/contact" className="text-sm font-medium text-white/60 transition hover:text-white">
+              Contact
+            </Link>
           </div>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
@@ -961,25 +967,38 @@ function Pricing() {
   const listClass = 'mt-8 flex-1 space-y-3.5 text-left text-sm leading-snug text-white/[0.82]'
   const outlineBtn = `mt-8 inline-flex h-12 w-full items-center justify-center rounded-xl border-2 border-white/[0.18] bg-transparent text-sm font-semibold text-white transition-colors hover:border-white/30 hover:bg-white/[0.04] ${btnGhostGlow}`
 
-  const starterFeatures = [
-    'Up to 5 clients',
-    '10 invoices / month',
-    'Manual WhatsApp share (not automated)',
-    'Basic tracking',
+  const freeFeatures = [
+    '1 invoice only',
+    'PDF download (watermarked)',
+    'Manual payment tracking',
+    'No WhatsApp reminders',
+    'No payment collection',
   ]
   const proFeatures = [
-    'Unlimited clients',
-    'Automated WhatsApp reminders',
-    'Reminder escalation sequences',
-    'Razorpay payment links',
-    'Cashflow dashboard',
-    'PDF invoices',
+    '50 invoices/month',
+    'Unlimited WhatsApp reminders',
+    'Razorpay + PayPal payments',
+    'Analytics dashboard',
+    'GST compliant PDFs',
+    'Client portal',
+    'Expense tracking',
   ]
-  const agencyFeatures = [
-    'Multi-user (up to 3 seats)',
+  const proMaxFeatures = [
+    'Unlimited invoices',
+    'Unlimited WhatsApp reminders',
     'White-label invoice branding',
-    'Team dashboards',
+    'Advanced analytics',
+    'Custom invoice prefix',
     'Priority support',
+    'Early access to features',
+  ]
+  const ultraProFeatures = [
+    'Everything in Pro Max',
+    'Up to 5 team members',
+    'Multiple business profiles',
+    'API access',
+    'Dedicated support',
+    'Custom onboarding',
   ]
 
   return (
@@ -987,11 +1006,23 @@ function Pricing() {
       <div className="container-premium">
         <div className="mx-auto mb-14 max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: ORANGE }}>
-            Recommended pricing model
+            Simple pricing for Indian freelancers
           </p>
           <h2 className="font-inter mt-3 text-3xl font-black tracking-[-0.04em] text-white sm:text-4xl">
             Choose the plan that fits how you work
           </h2>
+        </div>
+
+        {/* Launch Offer Banner */}
+        <div className="mx-auto mb-10 max-w-4xl">
+          <div 
+            className="relative overflow-hidden rounded-2xl p-6 text-center animate-pulse"
+            style={{ background: `linear-gradient(135deg, ${ORANGE}, #e85d00)` }}
+          >
+            <p className="text-lg font-bold text-white">
+              🔥 First 10 customers get all plans at ₹99/mo — 2 weeks only
+            </p>
+          </div>
         </div>
 
         <div className="mx-auto mb-10 flex w-full max-w-md flex-col items-center justify-center gap-3 sm:mx-auto sm:flex-row sm:gap-4">
@@ -1024,15 +1055,15 @@ function Pricing() {
               className="rounded-full border border-[#FF6B00]/35 px-2.5 py-0.5 font-inter text-[10px] font-bold uppercase tracking-wider shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
               style={{ backgroundColor: 'rgba(255, 107, 0, 0.22)', color: ORANGE }}
             >
-              Save ~30%
+              Save 10%
             </span>
           </div>
         </div>
 
-        <div className="mx-auto flex max-w-6xl flex-col items-stretch gap-6 lg:flex-row lg:items-stretch lg:justify-center lg:gap-5">
-          {/* STARTER */}
+        <div className="mx-auto flex max-w-7xl flex-col items-stretch gap-6 lg:flex-row lg:items-stretch lg:justify-center lg:gap-5">
+          {/* FREE */}
           <div className={cardGlass}>
-            <p className="font-inter text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">STARTER</p>
+            <p className="font-inter text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">FREE</p>
             <h3 className="font-inter mt-2 text-2xl font-bold tracking-tight text-white">Free forever</h3>
             <p className="mt-4 font-inter text-4xl font-black tabular-nums text-white">
               ₹0
@@ -1041,13 +1072,17 @@ function Pricing() {
               ) : null}
             </p>
             <p className="mt-4 text-sm font-medium leading-relaxed text-white/70">
-              Enough to feel the value — not enough to rely on it.
+              Perfect for trying out ChaseDue
             </p>
             <ul className={listClass}>
-              {starterFeatures.map((f) => (
+              {freeFeatures.map((f, i) => (
                 <li key={f} className="flex gap-3">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-white/50" strokeWidth={2.5} aria-hidden />
-                  <span>{f}</span>
+                  {i === 0 ? (
+                    <Lock className="mt-0.5 h-4 w-4 shrink-0 text-orange-500" strokeWidth={2.5} aria-hidden />
+                  ) : (
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-white/50" strokeWidth={2.5} aria-hidden />
+                  )}
+                  <span className={i === 0 ? 'font-semibold text-orange-500' : ''}>{f}</span>
                 </li>
               ))}
             </ul>
@@ -1055,11 +1090,11 @@ function Pricing() {
               Get Started for Free
             </Link>
             <p className="mt-3 text-center font-inter text-xs leading-relaxed text-white/45">
-              No credit card required. Free forever.
+              No credit card required
             </p>
           </div>
 
-          {/* PRO — recommended anchor */}
+          {/* PRO — Most Popular */}
           <div
             className={`relative z-10 flex w-full flex-1 flex-col rounded-2xl border-2 bg-[#141414]/95 p-8 text-left shadow-[0_24px_70px_-20px_rgba(255,107,0,0.35)] backdrop-blur-md sm:p-9 lg:max-w-[380px] lg:-translate-y-1 lg:scale-[1.02]`}
             style={{ borderColor: ORANGE }}
@@ -1068,7 +1103,7 @@ function Pricing() {
               className="absolute -top-3 left-1/2 max-w-[min(100%,280px)] -translate-x-1/2 rounded-full px-4 py-1.5 text-center text-[10px] font-bold uppercase leading-tight tracking-wide text-white sm:text-[11px]"
               style={{ background: `linear-gradient(90deg, ${ORANGE}, #e85d00)` }}
             >
-              Recommended anchor
+              Most Popular
             </div>
             <p className="mt-2 font-inter text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">PRO</p>
             <div className="mt-3">
@@ -1077,21 +1112,18 @@ function Pricing() {
                   <p className="font-inter text-4xl font-black tabular-nums sm:text-5xl" style={{ color: ORANGE }}>
                     ₹299<span className="text-lg font-semibold text-white/40">/mo</span>
                   </p>
-                  <p className="mt-2 text-sm opacity-70">
-                    That&apos;s less than ₹10/day — cheaper than a cup of chai.
-                  </p>
                 </>
               ) : (
                 <>
                   <p className="font-inter text-4xl font-black tabular-nums sm:text-5xl" style={{ color: ORANGE }}>
-                    ₹2,499<span className="text-lg font-semibold text-white/40">/year</span>
+                    ₹3,229<span className="text-lg font-semibold text-white/40">/year</span>
                   </p>
-                  <p className="mt-2 text-sm text-white/50">Save ~30% over monthly</p>
+                  <p className="mt-2 text-sm text-white/50 line-through">₹3,588/year</p>
                 </>
               )}
             </div>
             <p className="mt-5 text-sm font-medium leading-relaxed text-white/80">
-              This is the product that solves the problem.
+              Perfect for growing freelancers
             </p>
             <ul className={listClass}>
               {proFeatures.map((f) => (
@@ -1110,39 +1142,73 @@ function Pricing() {
             </Link>
           </div>
 
-          {/* AGENCY */}
+          {/* PRO MAX */}
           <div className={cardGlass}>
-            <p className="font-inter text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">AGENCY</p>
+            <p className="font-inter text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">PRO MAX</p>
             <div className="mt-3">
               {billingPeriod === 'monthly' ? (
                 <>
                   <p className="font-inter text-4xl font-black tabular-nums text-white sm:text-5xl">
                     ₹799<span className="text-lg font-semibold text-white/40">/mo</span>
                   </p>
-                  <p className="mt-2 text-sm text-white/50">or ₹6,999/year (~₹583/mo)</p>
                 </>
               ) : (
                 <>
                   <p className="font-inter text-4xl font-black tabular-nums text-white sm:text-5xl">
-                    ₹6,999<span className="text-lg font-semibold text-white/40">/year</span>
+                    ₹8,629<span className="text-lg font-semibold text-white/40">/year</span>
                   </p>
-                  <p className="mt-2 text-sm text-white/50">~₹583/mo billed annually — best for teams.</p>
+                  <p className="mt-2 text-sm text-white/50 line-through">₹9,588/year</p>
                 </>
               )}
             </div>
             <p className="mt-5 text-sm font-medium leading-relaxed text-white/70">
-              For small agencies managing multiple client projects.
+              For serious freelancers with high volume
             </p>
             <ul className={listClass}>
-              {agencyFeatures.map((f) => (
+              {proMaxFeatures.map((f) => (
                 <li key={f} className="flex gap-3">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-white/50" strokeWidth={2.5} aria-hidden />
                   <span>{f}</span>
                 </li>
               ))}
             </ul>
-            <Link href={'/login?next=' + encodeURIComponent('/dashboard/billing?plan=agency')} className={outlineBtn}>
-              Get Agency
+            <Link href={'/login?next=' + encodeURIComponent('/dashboard/billing?plan=pro_max')} className={outlineBtn}>
+              Get Pro Max
+            </Link>
+          </div>
+
+          {/* ULTRA PRO */}
+          <div className={cardGlass}>
+            <p className="font-inter text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">ULTRA PRO</p>
+            <div className="mt-3">
+              {billingPeriod === 'monthly' ? (
+                <>
+                  <p className="font-inter text-4xl font-black tabular-nums text-white sm:text-5xl">
+                    ₹1,499<span className="text-lg font-semibold text-white/40">/mo</span>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="font-inter text-4xl font-black tabular-nums text-white sm:text-5xl">
+                    ₹16,189<span className="text-lg font-semibold text-white/40">/year</span>
+                  </p>
+                  <p className="mt-2 text-sm text-white/50 line-through">₹17,988/year</p>
+                </>
+              )}
+            </div>
+            <p className="mt-5 text-sm font-medium leading-relaxed text-white/70">
+              For teams and agencies
+            </p>
+            <ul className={listClass}>
+              {ultraProFeatures.map((f) => (
+                <li key={f} className="flex gap-3">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-white/50" strokeWidth={2.5} aria-hidden />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <Link href={'/login?next=' + encodeURIComponent('/dashboard/billing?plan=ultra_pro')} className={outlineBtn}>
+              Get Ultra Pro
             </Link>
           </div>
         </div>
@@ -1605,6 +1671,12 @@ function Footer() {
               </Link>
               <Link href="/dashboard" className="block transition hover:text-white">
                 Dashboard
+              </Link>
+              <Link href="/help" className="block transition hover:text-white">
+                Help
+              </Link>
+              <Link href="/contact" className="block transition hover:text-white">
+                Contact
               </Link>
             </div>
           </div>
