@@ -6,3 +6,5 @@ out/
 .env.production
 .DS_Store
 app_expo_backup/
+.vercel
+.env*.local

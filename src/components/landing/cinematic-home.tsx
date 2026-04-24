@@ -38,6 +38,18 @@ const WA_GREEN = '#25D366'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
+// Add marquee keyframes for ticker animation
+if (typeof window !== 'undefined') {
+  const style = document.createElement('style')
+  style.textContent = `
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+  `
+  document.head.appendChild(style)
+}
+
 /** Primary actions: subtle glow + lift on hover (Bolt-style polish) */
 const btnPrimaryGlow =
   'shadow-[0_0_24px_rgba(255,107,0,0.35)] transition-transform duration-200 hover:scale-105 active:scale-[0.98]'
@@ -1002,16 +1014,33 @@ function Pricing() {
   ]
 
   return (
-    <section id="pricing" className="py-24 md:py-32" style={{ backgroundColor: BG }}>
-      <div className="container-premium">
-        <div className="mx-auto mb-14 max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: ORANGE }}>
-            Simple pricing for Indian freelancers
-          </p>
-          <h2 className="font-inter mt-3 text-3xl font-black tracking-[-0.04em] text-white sm:text-4xl">
-            Choose the plan that fits how you work
-          </h2>
+    <>
+      {/* Marquee Ticker Bar */}
+      <div 
+        className="relative overflow-hidden w-full" 
+        style={{ background: `linear-gradient(90deg, #F97316, #e85d00)` }}
+      >
+        <div 
+          className="flex animate-pulse"
+          style={{
+            animation: 'marquee 25s linear infinite',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          {Array(8).fill("🔥 LAUNCH OFFER — First 10 customers get ALL plans at ₹99/mo · 2 weeks only · ")}
         </div>
+      </div>
+
+      <section id="pricing" className="py-24 md:py-32" style={{ backgroundColor: BG }}>
+        <div className="container-premium">
+          <div className="mx-auto mb-14 max-w-2xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: ORANGE }}>
+              Simple pricing for Indian freelancers
+            </p>
+            <h2 className="font-inter mt-3 text-3xl font-black tracking-[-0.04em] text-white sm:text-4xl">
+              Choose the plan that fits how you work
+            </h2>
+          </div>
 
         {/* Launch Offer Banner */}
         <div className="mx-auto mb-10 max-w-4xl">
