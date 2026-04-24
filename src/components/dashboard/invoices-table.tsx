@@ -18,6 +18,13 @@ function shortId(id: string): string {
   return `${id.slice(0, 8)}…`
 }
 
+function getInvoiceDisplay(invoiceNumber: string | null, id: string): string {
+  if (invoiceNumber && invoiceNumber.trim()) {
+    return invoiceNumber.trim()
+  }
+  return `${id.slice(0, 8)}…`
+}
+
 function formatDate(d: string | null | undefined): string {
   if (!d) return '—'
   const parsed = Date.parse(d)
@@ -129,7 +136,7 @@ export default function InvoicesTable({
                         href={`/dashboard/invoices/${inv.id}`}
                         className="text-brand-400 underline-offset-2 hover:text-brand-300 hover:underline"
                       >
-                        {shortId(inv.id)}
+                        {getInvoiceDisplay(inv.invoice_number, inv.id)}
                       </Link>
                     </td>
                     <td className="whitespace-nowrap px-4 py-3 sm:px-5">
@@ -235,7 +242,7 @@ export default function InvoicesTable({
                         href={`/dashboard/invoices/${inv.id}`}
                         className="text-brand-400 hover:text-brand-300 hover:underline"
                       >
-                        {shortId(inv.id)}
+                        {getInvoiceDisplay(inv.invoice_number, inv.id)}
                       </Link>
                     </td>
                     <td className="max-w-[240px] truncate px-4 py-3 text-white sm:px-5">

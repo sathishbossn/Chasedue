@@ -18,6 +18,7 @@ export type WhatsappDeliverySummary = {
 
 export type DashboardInvoiceRow = {
   id: string
+  invoice_number: string | null
   client_id: string
   /** External pay link (UPI, hosted checkout, etc.) — dashboard Pay opens this when set. */
   payment_link_url: string | null
@@ -133,7 +134,7 @@ export async function getDashboardSnapshot(): Promise<
   const { data: invoices, error: invErr } = await supabase
     .from('invoices')
     .select(
-      'id, client_id, payment_link_url, total_amount, amount_subtotal, due_date, status, description, reminder_count, last_reminder_sent, last_chased_at, created_at, paid_at'
+      'id, invoice_number, client_id, payment_link_url, total_amount, amount_subtotal, due_date, status, description, reminder_count, last_reminder_sent, last_chased_at, created_at, paid_at'
     )
     .eq('user_id', uid)
     .order('created_at', { ascending: false })
@@ -525,7 +526,7 @@ export async function getInvoiceByIdForUser(
   const { data: row, error: invErr } = await supabase
     .from('invoices')
     .select(
-      'id, client_id, payment_link_url, total_amount, amount_subtotal, due_date, status, description, reminder_count, last_reminder_sent, last_chased_at, created_at, paid_at'
+      'id, invoice_number, client_id, payment_link_url, total_amount, amount_subtotal, due_date, status, description, reminder_count, last_reminder_sent, last_chased_at, created_at, paid_at'
     )
     .eq('id', invoiceId)
     .eq('user_id', user.id)

@@ -46,6 +46,19 @@ if (typeof window !== 'undefined') {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
+    @keyframes scroll-marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 20px rgba(249,115,22,0.4); }
+      50% { box-shadow: 0 0 40px rgba(249,115,22,0.8); }
+      100% { box-shadow: 0 0 20px rgba(249,115,22,0.4); }
+    }
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
   `
   document.head.appendChild(style)
 }
@@ -244,6 +257,27 @@ function Hero() {
               Professional invoices, automated WhatsApp reminders, and faster payments. Not an accounting app—just the
               smartest way to manage your cash flow.
             </p>
+
+            {/* Hero Marquee Ticker */}
+            <div className="relative overflow-hidden w-full mt-8">
+              <div 
+                className="flex whitespace-nowrap"
+                style={{
+                  animation: 'scroll-marquee 18s linear infinite',
+                  textShadow: '0 0 10px #F97316, 0 0 20px #F97316, 0 0 40px #F97316',
+                  color: '#F97316',
+                  backgroundColor: '#0f0f0f',
+                  padding: '12px 0',
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em'
+                }}
+              >
+                {Array(4).fill("🔥 LAUNCH OFFER · First 10 Customers · All Plans at ₹99/mo · 2 Weeks Only · ")}
+              </div>
+            </div>
+
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href="/login"
@@ -1045,11 +1079,26 @@ function Pricing() {
         {/* Launch Offer Banner */}
         <div className="mx-auto mb-10 max-w-4xl">
           <div 
-            className="relative overflow-hidden rounded-2xl p-6 text-center animate-pulse"
-            style={{ background: `linear-gradient(135deg, ${ORANGE}, #e85d00)` }}
+            className="relative overflow-hidden rounded-2xl p-8 text-center"
+            style={{ 
+              background: `linear-gradient(135deg, ${ORANGE}, #e85d00)`,
+              animation: 'pulse-glow 2s ease-in-out infinite',
+              textShadow: '0 0 10px rgba(255,255,255,0.8)'
+            }}
           >
-            <p className="text-lg font-bold text-white">
-              🔥 First 10 customers get all plans at ₹99/mo — 2 weeks only
+            {/* Shimmer overlay */}
+            <div 
+              className="absolute inset-0 opacity-30"
+              style={{
+                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+                animation: 'shimmer 3s ease-in-out infinite'
+              }}
+            />
+            <p className="text-xl font-black text-white relative z-10">
+              🔥 First 10 customers get all plans at ₹99/mo — 2 weeks only 🔥
+            </p>
+            <p className="mt-2 text-sm text-white/70 font-medium">
+              spots filling fast!
             </p>
           </div>
         </div>

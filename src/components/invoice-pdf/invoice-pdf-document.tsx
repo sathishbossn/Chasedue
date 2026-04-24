@@ -10,14 +10,11 @@ import {
 import type { InvoicePdfViewModel } from '@/lib/invoice/invoice-pdf-types'
 
 /**
- * Stable Google Fonts (gstatic) TTF endpoints — consistent ₹ (U+20B9) across OS.
- * @see https://fonts.google.com/specimen/Roboto
+ * Premium Google Fonts for professional invoice typography
  */
-const ROBOTO_REGULAR =
-  'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me5Q.ttf'
+const ROBOTO_REGULAR = 'https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me5Q.ttf'
 const ROBOTO_BOLD = 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlvAw.ttf'
-const ROBOTO_ITALIC =
-  'https://fonts.gstatic.com/s/roboto/v30/KFOkCnqEu92Fr1Mu51xIIzc.ttf'
+const ROBOTO_ITALIC = 'https://fonts.gstatic.com/s/roboto/v30/KFOkCnqEu92Fr1Mu51xIIzc.ttf'
 
 let fontsReady = false
 function ensureFonts(): void {
@@ -35,153 +32,213 @@ function ensureFonts(): void {
 
 ensureFonts()
 
+// Premium color scheme
 const ORANGE = '#F97316'
-const BRAND_ACCENT = '#FF4F01'
-const DARK = '#1a1a1a'
+const DARK_GRAY = '#1a1a1a'
 const GRAY = '#6b7280'
-const LIGHT_GRAY = '#fafafa'
+const LIGHT_GRAY = '#f3f4f6'
 const WHITE = '#ffffff'
 const GREEN = '#16a34a'
+const RED = '#dc2626'
 const BORDER = '#e5e7eb'
 
 const styles = StyleSheet.create({
-  page: { fontFamily: 'Roboto', fontSize: 9, color: DARK, paddingBottom: 56 },
+  page: { 
+    fontFamily: 'Roboto', 
+    fontSize: 10, 
+    color: DARK_GRAY, 
+    backgroundColor: WHITE,
+    padding: 40,
+    paddingBottom: 80,
+  },
 
-  brandStrip: { height: 4, backgroundColor: BRAND_ACCENT, width: '100%' },
-
+  // Header with logo and title
   header: {
-    backgroundColor: ORANGE,
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
+    alignItems: 'flex-start',
+    marginBottom: 24,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: BORDER,
   },
-  headerLeft: { flexDirection: 'row', alignItems: 'center', flex: 1 },
-  logo: { width: 28, height: 28, marginRight: 8, objectFit: 'contain' },
-  brandWordmark: { color: WHITE, fontSize: 15, fontWeight: 700 },
-  taxInvoiceLabel: { color: WHITE, fontSize: 13, fontWeight: 700, letterSpacing: 1.5 },
+  headerLeft: { flex: 1, flexDirection: 'row', alignItems: 'center' },
+  logo: { width: 32, height: 32, marginRight: 12, objectFit: 'contain' },
+  brandWordmark: { fontSize: 18, fontWeight: 700, color: DARK_GRAY },
+  headerRight: { alignItems: 'flex-end', textAlign: 'right' },
+  taxInvoiceTitle: { fontSize: 24, fontWeight: 700, color: DARK_GRAY, marginBottom: 4 },
+  invoiceNumber: { fontSize: 14, fontWeight: 500, color: GRAY, marginBottom: 8 },
 
-  body: { paddingHorizontal: 24, paddingTop: 18 },
-
-  metaRow: { flexDirection: 'row', marginBottom: 14 },
-  metaLeft: { flex: 1, paddingRight: 12 },
-  metaRight: { width: 220 },
-  label: {
-    fontSize: 7,
-    color: GRAY,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginBottom: 2,
-  },
-  value: { fontSize: 9, color: DARK, marginBottom: 2 },
-  valueBold: { fontSize: 9, color: DARK, fontWeight: 700, marginBottom: 2 },
-  invoiceNum: { fontSize: 13, fontWeight: 700, color: DARK, marginBottom: 4 },
-
+  // Status badges
   badge: {
-    alignSelf: 'flex-start',
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 3,
-    marginBottom: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+    alignSelf: 'flex-end',
   },
   badgePending: { backgroundColor: ORANGE },
   badgePaid: { backgroundColor: GREEN },
-  badgeText: { color: WHITE, fontSize: 8, fontWeight: 700 },
+  badgeOverdue: { backgroundColor: RED },
+  badgeText: { color: WHITE, fontSize: 10, fontWeight: 600 },
 
-  divider: { height: 1, backgroundColor: BORDER, marginVertical: 12 },
+  // Section labels
+  sectionLabel: {
+    fontSize: 8,
+    color: GRAY,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: 8,
+    fontWeight: 500,
+  },
 
-  billToLabel: {
-    fontSize: 7,
+  // Seller block (FROM)
+  sellerBlock: {
+    marginBottom: 24,
+    padding: 16,
+    backgroundColor: LIGHT_GRAY,
+    borderRadius: 8,
+  },
+  sellerName: { fontSize: 14, fontWeight: 600, color: DARK_GRAY, marginBottom: 6 },
+  sellerInfo: { fontSize: 9, color: GRAY, marginBottom: 2, lineHeight: 1.4 },
+
+  // Bill To block
+  billToBlock: {
+    marginBottom: 24,
+    padding: 16,
+    backgroundColor: WHITE,
+    borderWidth: 1,
+    borderColor: BORDER,
+    borderRadius: 8,
+  },
+  clientName: { fontSize: 14, fontWeight: 600, color: DARK_GRAY, marginBottom: 6 },
+  clientInfo: { fontSize: 9, color: GRAY, marginBottom: 2, lineHeight: 1.4 },
+
+  // Metadata grid (4 cells)
+  metadataGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 24,
+    gap: 16,
+  },
+  metadataCell: {
+    flex: 1,
+    minWidth: '45%',
+    padding: 12,
+    backgroundColor: LIGHT_GRAY,
+    borderRadius: 6,
+  },
+  metadataLabel: {
+    fontSize: 8,
     color: GRAY,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
     marginBottom: 4,
   },
+  metadataValue: { fontSize: 11, fontWeight: 500, color: DARK_GRAY },
 
-  table: { marginTop: 12 },
-  tableHeader: { flexDirection: 'row', backgroundColor: DARK, paddingVertical: 6, paddingHorizontal: 0 },
+  // Items table
+  table: { marginBottom: 24 },
+  tableHeader: {
+    flexDirection: 'row',
+    backgroundColor: LIGHT_GRAY,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
   tableRow: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: BORDER,
-    backgroundColor: WHITE,
+    paddingVertical: 12,
+    paddingHorizontal: 12,
   },
-  tableRowAlt: {
+  tableHeaderText: { fontSize: 9, fontWeight: 600, color: DARK_GRAY },
+  tableCellText: { fontSize: 9, color: DARK_GRAY },
+  tableCellDesc: { fontSize: 9, color: DARK_GRAY, lineHeight: 1.4, flex: 1 },
+
+  colDesc: { flex: 2, minWidth: 0, marginRight: 12 },
+  colQty: { width: 40, textAlign: 'center' },
+  colRate: { width: 80, textAlign: 'right', marginRight: 12 },
+  colAmount: { width: 80, textAlign: 'right' },
+
+  // Totals summary box
+  totalsContainer: {
     flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: BORDER,
-    backgroundColor: LIGHT_GRAY,
+    justifyContent: 'flex-end',
+    marginBottom: 24,
   },
-  tableCell: { paddingVertical: 6, paddingHorizontal: 6 },
-  tableHeaderText: { color: WHITE, fontSize: 7, fontWeight: 700 },
-  tableCellText: { fontSize: 8, color: DARK },
-  tableCellDescText: { fontSize: 8, color: DARK, lineHeight: 1.45, textAlign: 'left' },
-
-  colNo: { width: 22 },
-  colDesc: { flex: 1, minWidth: 0 },
-  colHsn: { width: 52 },
-  colQty: { width: 28 },
-  colUnit: { width: 36 },
-  colRate: { width: 64, alignItems: 'flex-end' },
-  colAmt: { width: 72, alignItems: 'flex-end' },
-
-  totalsSection: { flexDirection: 'row', justifyContent: 'flex-end', marginTop: 10 },
-  totalsTable: { width: 280 },
-  totalRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 4, paddingHorizontal: 4 },
-  totalRowGrand: {
+  totalsBox: {
+    width: 280,
+    padding: 16,
+    backgroundColor: LIGHT_GRAY,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: BORDER,
+  },
+  totalRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 6,
-    paddingHorizontal: 4,
-    marginTop: 4,
-    borderTopWidth: 1.5,
-    borderTopColor: DARK,
   },
-  totalLabel: { fontSize: 9, color: GRAY, width: 140 },
-  totalValue: { fontSize: 9, color: DARK, textAlign: 'right', flex: 1 },
-  grandTotalLabel: { fontSize: 11, color: DARK, fontWeight: 700, width: 140 },
-  grandTotalValue: { fontSize: 11, color: ORANGE, fontWeight: 700, textAlign: 'right', flex: 1 },
+  totalLabel: { fontSize: 9, color: GRAY, flex: 1 },
+  totalValue: { fontSize: 9, color: DARK_GRAY, textAlign: 'right', fontWeight: 500 },
+  grandTotalRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 8,
+    marginTop: 8,
+    borderTopWidth: 2,
+    borderTopColor: ORANGE,
+  },
+  grandTotalLabel: { fontSize: 12, color: DARK_GRAY, fontWeight: 700, flex: 1 },
+  grandTotalValue: { fontSize: 12, color: ORANGE, fontWeight: 700, textAlign: 'right' },
 
-  amountWordsInTotals: {
-    marginTop: 10,
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: BORDER,
+  // Amount in words
+  amountWordsSection: {
+    marginBottom: 24,
+    padding: 12,
+    backgroundColor: LIGHT_GRAY,
+    borderRadius: 6,
   },
-  amountWordsItalic: {
-    fontSize: 8.5,
-    color: GRAY,
-    fontStyle: 'italic',
-    fontWeight: 400,
-    lineHeight: 1.45,
-  },
-
-  infoSection: { marginTop: 12 },
-  infoLabel: {
-    fontSize: 7,
+  amountWordsLabel: {
+    fontSize: 8,
     color: GRAY,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
-    marginBottom: 3,
+    marginBottom: 4,
   },
-  infoValue: { fontSize: 8.5, color: DARK, lineHeight: 1.35 },
+  amountWordsText: { fontSize: 9, color: DARK_GRAY, lineHeight: 1.4 },
 
+  // Notes section
+  notesSection: {
+    marginBottom: 24,
+    padding: 12,
+    backgroundColor: LIGHT_GRAY,
+    borderRadius: 6,
+  },
+  notesLabel: {
+    fontSize: 8,
+    color: GRAY,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: 4,
+  },
+  notesText: { fontSize: 9, color: DARK_GRAY, lineHeight: 1.4 },
+
+  // Footer
   footer: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    paddingVertical: 8,
-    paddingHorizontal: 24,
+    paddingVertical: 12,
+    paddingHorizontal: 40,
     borderTopWidth: 1,
     borderTopColor: BORDER,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     backgroundColor: WHITE,
   },
-  footerText: { fontSize: 7, color: GRAY },
+  footerText: { fontSize: 8, color: GRAY, textAlign: 'center' },
 })
 
 function fmt(n: number): string {
@@ -198,6 +255,17 @@ function formatRateLabel(n: number): string {
   return r.toFixed(1)
 }
 
+function getStatusBadgeStyle(status: string) {
+  const st = status.trim().toUpperCase()
+  if (st === 'PAID' || st === 'SETTLED' || st === 'COMPLETED') {
+    return styles.badgePaid
+  }
+  if (st === 'OVERDUE') {
+    return styles.badgeOverdue
+  }
+  return styles.badgePending
+}
+
 export function InvoicePdfDocument({
   data,
   logoUrl,
@@ -205,183 +273,181 @@ export function InvoicePdfDocument({
   data: InvoicePdfViewModel
   logoUrl: string
 }) {
-  const st = data.status.trim().toUpperCase()
-  const isPaid = st === 'PAID' || st === 'SETTLED' || st === 'COMPLETED'
-
-  const detailRows: [string, string][] = [
-    ['Invoice Date', data.invoiceDate],
-    ['Due Date', data.dueDate],
-    ['Place of Supply', data.placeOfSupplyShort],
-    ['Currency', data.currency],
-  ]
+  const isPaid = data.status === 'PAID' || data.status === 'SETTLED' || data.status === 'COMPLETED'
+  const isOverdue = data.status === 'OVERDUE'
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <View style={styles.brandStrip} fixed />
-        <View style={styles.header} fixed>
+        {/* Header with logo and title */}
+        <View style={styles.header}>
           <View style={styles.headerLeft}>
             <Image style={styles.logo} src={logoUrl} />
             <Text style={styles.brandWordmark}>ChaseDue</Text>
           </View>
-          <Text style={styles.taxInvoiceLabel}>TAX INVOICE</Text>
+          <View style={styles.headerRight}>
+            <Text style={styles.taxInvoiceTitle}>TAX INVOICE</Text>
+            <Text style={styles.invoiceNumber}>{data.invoiceNumber}</Text>
+            <View style={[styles.badge, getStatusBadgeStyle(data.status)]}>
+              <Text style={styles.badgeText}>{data.status}</Text>
+            </View>
+          </View>
         </View>
 
-        <View style={styles.body}>
-          <View style={styles.metaRow}>
-            <View style={styles.metaLeft}>
-              <Text style={styles.label}>From</Text>
-              <Text style={styles.valueBold}>{data.seller.businessName}</Text>
-              {data.seller.gstin && data.seller.gstin !== '—' ? (
-                <Text style={styles.value}>GSTIN: {data.seller.gstin}</Text>
-              ) : null}
-              {data.seller.address ? <Text style={styles.value}>{data.seller.address}</Text> : null}
-              <Text style={styles.value}>
-                {[data.seller.email, data.seller.phone].filter(Boolean).join(' · ')}
-              </Text>
-            </View>
+        {/* Seller Block (FROM) */}
+        <View style={styles.sellerBlock}>
+          <Text style={styles.sectionLabel}>FROM</Text>
+          <Text style={styles.sellerName}>{data.seller.businessName}</Text>
+          {data.seller.gstin && data.seller.gstin !== '—' && (
+            <Text style={styles.sellerInfo}>GSTIN: {data.seller.gstin}</Text>
+          )}
+          {data.seller.address && (
+            <Text style={styles.sellerInfo}>{data.seller.address}</Text>
+          )}
+          {data.seller.email && (
+            <Text style={styles.sellerInfo}>{data.seller.email}</Text>
+          )}
+          {data.seller.phone && (
+            <Text style={styles.sellerInfo}>{data.seller.phone}</Text>
+          )}
+        </View>
 
-            <View style={styles.metaRight}>
-              <Text style={styles.invoiceNum}>#{data.invoiceNumber}</Text>
-              <View style={[styles.badge, isPaid ? styles.badgePaid : styles.badgePending]}>
-                <Text style={styles.badgeText}>{data.status}</Text>
-              </View>
-              <View style={{ marginTop: 6 }}>
-                {detailRows.map(([label, value], i) => (
-                  <View key={`d-${i}`} style={{ flexDirection: 'row', marginBottom: 3 }}>
-                    <Text style={[styles.label, { width: 88, marginBottom: 0 }]}>{label}</Text>
-                    <Text style={styles.value}>{value}</Text>
-                  </View>
-                ))}
-              </View>
+        {/* Bill To Block */}
+        <View style={styles.billToBlock}>
+          <Text style={styles.sectionLabel}>BILL TO</Text>
+          <Text style={styles.clientName}>{data.client.name}</Text>
+          {data.client.gstin && (
+            <Text style={styles.clientInfo}>GSTIN: {data.client.gstin}</Text>
+          )}
+          {data.client.address && (
+            <Text style={styles.clientInfo}>{data.client.address}</Text>
+          )}
+          {data.client.email && (
+            <Text style={styles.clientInfo}>{data.client.email}</Text>
+          )}
+          {data.client.phone && (
+            <Text style={styles.clientInfo}>{data.client.phone}</Text>
+          )}
+        </View>
+
+        {/* Metadata Grid (4 cells) */}
+        <View style={styles.metadataGrid}>
+          <View style={styles.metadataCell}>
+            <Text style={styles.metadataLabel}>Invoice Date</Text>
+            <Text style={styles.metadataValue}>{data.invoiceDate}</Text>
+          </View>
+          <View style={styles.metadataCell}>
+            <Text style={styles.metadataLabel}>Due Date</Text>
+            <Text style={styles.metadataValue}>{data.dueDate}</Text>
+          </View>
+          <View style={styles.metadataCell}>
+            <Text style={styles.metadataLabel}>Place of Supply</Text>
+            <Text style={styles.metadataValue}>{data.placeOfSupplyShort}</Text>
+          </View>
+          <View style={styles.metadataCell}>
+            <Text style={styles.metadataLabel}>Currency</Text>
+            <Text style={styles.metadataValue}>{data.currency}</Text>
+          </View>
+        </View>
+
+        {/* Items Table */}
+        <View style={styles.table}>
+          <View style={styles.tableHeader}>
+            <View style={styles.colDesc}>
+              <Text style={styles.tableHeaderText}>Description</Text>
+            </View>
+            <View style={styles.colQty}>
+              <Text style={styles.tableHeaderText}>Qty</Text>
+            </View>
+            <View style={styles.colRate}>
+              <Text style={styles.tableHeaderText}>Rate</Text>
+            </View>
+            <View style={styles.colAmount}>
+              <Text style={styles.tableHeaderText}>Amount</Text>
             </View>
           </View>
 
-          <View style={styles.divider} />
-
-          <Text style={styles.billToLabel}>Bill To</Text>
-          <Text style={styles.valueBold}>{data.client.name}</Text>
-          {data.client.gstin ? <Text style={styles.value}>GSTIN: {data.client.gstin}</Text> : null}
-          {data.client.address ? <Text style={styles.value}>{data.client.address}</Text> : null}
-          {data.client.email ? <Text style={styles.value}>{data.client.email}</Text> : null}
-          {data.client.phone ? <Text style={styles.value}>{data.client.phone}</Text> : null}
-
-          <View style={styles.table}>
-            <View style={styles.tableHeader}>
-              <View style={[styles.tableCell, styles.colNo]}>
-                <Text style={styles.tableHeaderText}>#</Text>
-              </View>
-              <View style={[styles.tableCell, styles.colDesc]}>
-                <Text style={styles.tableHeaderText}>Description</Text>
-              </View>
-              <View style={[styles.tableCell, styles.colHsn]}>
-                <Text style={styles.tableHeaderText}>HSN</Text>
-              </View>
-              <View style={[styles.tableCell, styles.colQty]}>
-                <Text style={styles.tableHeaderText}>Qty</Text>
-              </View>
-              <View style={[styles.tableCell, styles.colUnit]}>
-                <Text style={styles.tableHeaderText}>Unit</Text>
-              </View>
-              <View style={[styles.tableCell, styles.colRate]}>
-                <Text style={styles.tableHeaderText}>Rate</Text>
-              </View>
-              <View style={[styles.tableCell, styles.colAmt]}>
-                <Text style={styles.tableHeaderText}>Amount</Text>
-              </View>
-            </View>
-
-            {data.lineItems.map((item, i) => (
-              <View key={`line-${i}`} style={i % 2 === 0 ? styles.tableRow : styles.tableRowAlt}>
-                <View style={[styles.tableCell, styles.colNo]}>
-                  <Text style={styles.tableCellText}>{i + 1}</Text>
-                </View>
-                <View style={[styles.tableCell, styles.colDesc]} wrap>
-                  <Text style={styles.tableCellDescText}>{item.description}</Text>
-                </View>
-                <View style={[styles.tableCell, styles.colHsn]}>
-                  <Text style={styles.tableCellText}>{item.hsn ?? '998314'}</Text>
-                </View>
-                <View style={[styles.tableCell, styles.colQty]}>
-                  <Text style={styles.tableCellText}>{String(item.qty)}</Text>
-                </View>
-                <View style={[styles.tableCell, styles.colUnit]}>
-                  <Text style={styles.tableCellText}>{item.unit ?? '—'}</Text>
-                </View>
-                <View style={[styles.tableCell, styles.colRate]}>
-                  <Text style={styles.tableCellText}>{fmt(item.rate)}</Text>
-                </View>
-                <View style={[styles.tableCell, styles.colAmt]}>
-                  <Text style={styles.tableCellText}>{fmt(item.amount)}</Text>
-                </View>
-              </View>
-            ))}
-          </View>
-
-          <View style={styles.totalsSection}>
-            <View style={styles.totalsTable}>
-              <View style={styles.totalRow}>
-                <Text style={styles.totalLabel}>Taxable Value</Text>
-                <Text style={styles.totalValue}>{fmt(data.taxableValue)}</Text>
-              </View>
-              {data.taxType === 'intra' ? (
-                <>
-                  <View style={styles.totalRow}>
-                    <Text style={styles.totalLabel}>
-                      CGST @ {formatRateLabel(data.cgstRate)}%
-                    </Text>
-                    <Text style={styles.totalValue}>{fmt(data.cgstAmount)}</Text>
-                  </View>
-                  <View style={styles.totalRow}>
-                    <Text style={styles.totalLabel}>
-                      SGST @ {formatRateLabel(data.sgstRate)}%
-                    </Text>
-                    <Text style={styles.totalValue}>{fmt(data.sgstAmount)}</Text>
-                  </View>
-                </>
-              ) : (
-                <View style={styles.totalRow}>
-                  <Text style={styles.totalLabel}>IGST @ {formatRateLabel(data.igstRate)}%</Text>
-                  <Text style={styles.totalValue}>{fmt(data.igstAmount)}</Text>
-                </View>
-              )}
-              <View style={styles.totalRowGrand}>
-                <Text style={styles.grandTotalLabel}>Grand Total</Text>
-                <Text style={styles.grandTotalValue}>{fmt(data.grandTotal)}</Text>
-              </View>
-              <View style={styles.amountWordsInTotals}>
-                <Text style={styles.amountWordsItalic}>
-                  Amount in words: {data.amountInWords}
+          {data.lineItems.map((item, i) => (
+            <View key={`line-${i}`} style={styles.tableRow}>
+              <View style={styles.colDesc}>
+                <Text style={styles.tableCellDesc}>
+                  {item.description === 'nil' ? 'Professional Services' : item.description}
                 </Text>
               </View>
+              <View style={styles.colQty}>
+                <Text style={styles.tableCellText}>{String(item.qty)}</Text>
+              </View>
+              <View style={styles.colRate}>
+                <Text style={styles.tableCellText}>{fmt(item.rate)}</Text>
+              </View>
+              <View style={styles.colAmount}>
+                <Text style={styles.tableCellText}>{fmt(item.amount)}</Text>
+              </View>
             </View>
-          </View>
-
-          {(data.seller.bankName || data.seller.accountNumber || data.seller.ifsc) && (
-            <View style={styles.infoSection}>
-              <Text style={styles.infoLabel}>Bank</Text>
-              <Text style={styles.infoValue}>
-                {[data.seller.businessName, data.seller.accountNumber, data.seller.ifsc, data.seller.bankName]
-                  .filter(Boolean)
-                  .join(' · ')}
-              </Text>
-            </View>
-          )}
-
-          {data.notes ? (
-            <View style={[styles.infoSection, { marginTop: 8 }]}>
-              <Text style={styles.infoLabel}>Notes</Text>
-              <Text style={styles.infoValue}>{data.notes}</Text>
-            </View>
-          ) : null}
+          ))}
         </View>
 
-        <View style={styles.footer} fixed>
-          <Text style={styles.footerText}>Generated by ChaseDue · chasedue.in</Text>
-          <Text
-            style={styles.footerText}
-            render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}
-          />
+        {/* Totals Summary Box */}
+        <View style={styles.totalsContainer}>
+          <View style={styles.totalsBox}>
+            <View style={styles.totalRow}>
+              <Text style={styles.totalLabel}>Taxable Value</Text>
+              <Text style={styles.totalValue}>{fmt(data.taxableValue)}</Text>
+            </View>
+            {data.taxType === 'intra' ? (
+              <>
+                <View style={styles.totalRow}>
+                  <Text style={styles.totalLabel}>
+                    CGST @ {formatRateLabel(data.cgstRate)}%
+                  </Text>
+                  <Text style={styles.totalValue}>{fmt(data.cgstAmount)}</Text>
+                </View>
+                <View style={styles.totalRow}>
+                  <Text style={styles.totalLabel}>
+                    SGST @ {formatRateLabel(data.sgstRate)}%
+                  </Text>
+                  <Text style={styles.totalValue}>{fmt(data.sgstAmount)}</Text>
+                </View>
+              </>
+            ) : (
+              <View style={styles.totalRow}>
+                <Text style={styles.totalLabel}>IGST @ {formatRateLabel(data.igstRate)}%</Text>
+                <Text style={styles.totalValue}>{fmt(data.igstAmount)}</Text>
+              </View>
+            )}
+            <View style={styles.grandTotalRow}>
+              <Text style={styles.grandTotalLabel}>Grand Total</Text>
+              <Text style={styles.grandTotalValue}>{fmt(data.grandTotal)}</Text>
+            </View>
+            {!isPaid && (
+              <View style={styles.totalRow}>
+                <Text style={styles.totalLabel}>Amount Due</Text>
+                <Text style={styles.totalValue}>{fmt(data.grandTotal)}</Text>
+              </View>
+            )}
+          </View>
+        </View>
+
+        {/* Amount in Words */}
+        <View style={styles.amountWordsSection}>
+          <Text style={styles.amountWordsLabel}>Amount in words:</Text>
+          <Text style={styles.amountWordsText}>{data.amountInWords}</Text>
+        </View>
+
+        {/* Notes Section */}
+        {data.notes && (
+          <View style={styles.notesSection}>
+            <Text style={styles.notesLabel}>Notes</Text>
+            <Text style={styles.notesText}>{data.notes}</Text>
+          </View>
+        )}
+
+        {/* Footer */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>
+            Generated by ChaseDue · chasedue.com · support@chasedue.com
+          </Text>
+          <Text style={styles.footerText}>This is a computer-generated invoice.</Text>
         </View>
       </Page>
     </Document>
