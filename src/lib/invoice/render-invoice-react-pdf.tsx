@@ -1,12 +1,18 @@
-import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer'
+import { Document, Page, Text, View, StyleSheet, Image, Font } from '@react-pdf/renderer'
 import { renderToBuffer } from '@react-pdf/renderer'
 import type { InvoicePdfViewModel } from '@/lib/invoice/invoice-pdf-types'
+
+// Register NotoSans font for rupee symbol support
+Font.register({
+  family: 'NotoSans',
+  src: 'https://fonts.gstatic.com/s/notosans/v36/o-0IIpQlx3QUlC5A4PNr5TRA.woff2',
+})
 
 // Styles
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontFamily: 'Helvetica',
+    padding: 25,
+    fontFamily: 'NotoSans',
     fontSize: 10,
     color: '#1a1a1a',
   },
@@ -215,8 +221,8 @@ const styles = StyleSheet.create({
   footer: {
     position: 'absolute',
     bottom: 20,
-    left: 30,
-    right: 30,
+    left: 25,
+    right: 25,
     borderTopWidth: 1,
     borderTopColor: '#e5e7eb',
     paddingTop: 8,
@@ -252,17 +258,21 @@ function InvoicePdfDocument({ data, logoBase64 }: { data: InvoicePdfViewModel; l
 
   return (
     <Document>
-      <Page size="A4" style={{ position: 'relative', padding: 30 }}>
+      <Page size="A4" style={{ position: 'relative', padding: 25 }}>
         {/* HEADER */}
         <View style={styles.header}>
           <View style={styles.headerLeft}>
             {logoBase64 && <Image src={logoBase64} style={styles.logo} />}
-            <Text style={styles.businessName}>{businessName}</Text>
-            {data.seller.address && <Text style={styles.sellerInfo}>{data.seller.address}</Text>}
-            {data.seller.gstin && data.seller.gstin !== '—' && (
+            <Text style={styles.businessName}>{businessName || 'Your Business'}</Text>
+            {data.seller.address && data.seller.address !== '—' && data.seller.address !== '— | —' && (
+              <Text style={styles.sellerInfo}>{data.seller.address}</Text>
+            )}
+            {data.seller.gstin && data.seller.gstin !== '—' && data.seller.gstin !== '— | —' && (
               <Text style={styles.sellerInfo}>GSTIN: {data.seller.gstin}</Text>
             )}
-            {data.seller.email && <Text style={styles.sellerInfo}>{data.seller.email}</Text>}
+            {data.seller.email && data.seller.email !== '—' && data.seller.email !== '— | —' && (
+              <Text style={styles.sellerInfo}>{data.seller.email}</Text>
+            )}
           </View>
           <View style={styles.headerRight}>
             <Text style={styles.invoiceTitle}>INVOICE</Text>
