@@ -991,7 +991,7 @@ function Pricing() {
 
   const freeFeatures = [
     '3 invoices total (lifetime)',
-    'PDF download (watermarked)',
+    'PDF download (ChaseDue branded)',
     'Manual payment tracking',
     'No WhatsApp reminders',
     'No payment collection',
