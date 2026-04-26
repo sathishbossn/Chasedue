@@ -1,11 +1,10 @@
 import { buildInvoicePdfViewModelFromPortalRow } from '@/lib/invoice/build-invoice-pdf-view-model'
-import { getInvoicePdfLogoIconUrl } from '@/lib/invoice/invoice-pdf-logo'
-import { renderInvoicePdfToBuffer } from '@/lib/invoice/render-invoice-react-pdf'
+import { renderInvoiceJsPdf } from '@/lib/invoice/render-invoice-js-pdf'
 import type { SupabaseClient } from '@supabase/supabase-js'
 
 /**
  * Loads invoice via `get_portal_invoice` (works for dashboard + portal contexts)
- * and returns PDF bytes.
+ * and returns PDF bytes using jsPDF implementation.
  */
 export async function renderChaseDueInvoicePdf(
   supabase: SupabaseClient,
@@ -20,7 +19,6 @@ export async function renderChaseDueInvoicePdf(
     throw new Error('Invoice not found')
   }
   const vm = buildInvoicePdfViewModelFromPortalRow(row)
-  const logoUrl = getInvoicePdfLogoIconUrl()
-  const buffer = await renderInvoicePdfToBuffer(vm, logoUrl)
+  const buffer = await renderInvoiceJsPdf(vm)
   return { buffer, invoiceNumber: vm.invoiceNumber }
 }
