@@ -49,4 +49,5 @@ export type InvoicePdfViewModel = {
     phone: string
   }
   notes: string
+  isFreePlan: boolean
 }

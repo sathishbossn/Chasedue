@@ -38,18 +38,10 @@ const WA_GREEN = '#25D366'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-// Add marquee keyframes for ticker animation
+// Add keyframes for animations
 if (typeof window !== 'undefined') {
   const style = document.createElement('style')
   style.textContent = `
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-    @keyframes scroll-marquee {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
     @keyframes pulse-glow {
       0% { box-shadow: 0 0 20px rgba(249,115,22,0.4); }
       50% { box-shadow: 0 0 40px rgba(249,115,22,0.8); }
@@ -261,26 +253,6 @@ function Hero() {
               Professional invoices, automated WhatsApp reminders, and faster payments. Not an accounting app—just the
               smartest way to manage your cash flow.
             </p>
-
-            {/* Hero Marquee Ticker */}
-            <div className="relative overflow-hidden w-full mt-8">
-              <div 
-                className="flex whitespace-nowrap"
-                style={{
-                  animation: 'scroll-marquee 18s linear infinite',
-                  textShadow: '0 0 10px #F97316, 0 0 20px #F97316, 0 0 40px #F97316',
-                  color: '#F97316',
-                  backgroundColor: '#0f0f0f',
-                  padding: '12px 0',
-                  fontSize: '14px',
-                  fontWeight: 'bold',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em'
-                }}
-              >
-                {Array(4).fill("🔥 LAUNCH OFFER · First 10 Customers · All Plans at ₹99/mo · 2 Weeks Only · ")}
-              </div>
-            </div>
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link

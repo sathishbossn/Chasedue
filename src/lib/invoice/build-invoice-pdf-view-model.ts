@@ -151,6 +151,7 @@ export function buildInvoicePdfViewModelFromPortalRow(inv: Record<string, unknow
       phone: '',
     },
     notes: 'Payment due within 14 days.',
+    isFreePlan: false, // TODO: Determine from user subscription/plan
   }
 }
 
