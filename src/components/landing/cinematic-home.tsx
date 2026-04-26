@@ -55,6 +55,10 @@ if (typeof window !== 'undefined') {
       50% { box-shadow: 0 0 40px rgba(249,115,22,0.8); }
       100% { box-shadow: 0 0 20px rgba(249,115,22,0.4); }
     }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(249,115,22,0.4); }
+      50% { box-shadow: 0 0 60px rgba(249,115,22,0.9); }
+    }
     @keyframes shimmer {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
@@ -1014,57 +1018,38 @@ function Pricing() {
   const outlineBtn = `mt-8 inline-flex h-12 w-full items-center justify-center rounded-xl border-2 border-white/[0.18] bg-transparent text-sm font-semibold text-white transition-colors hover:border-white/30 hover:bg-white/[0.04] ${btnGhostGlow}`
 
   const freeFeatures = [
-    '1 invoice only',
+    '3 invoices total (lifetime)',
     'PDF download (watermarked)',
     'Manual payment tracking',
     'No WhatsApp reminders',
     'No payment collection',
+    'Basic dashboard',
   ]
   const proFeatures = [
-    '50 invoices/month',
+    '25 invoices/month',
     'Unlimited WhatsApp reminders',
-    'Razorpay + PayPal payments',
-    'Analytics dashboard',
-    'GST compliant PDFs',
+    'Automated payment chasing',
+    'Razorpay payment collection',
     'Client portal',
+    'GST compliant PDFs',
+    'Analytics dashboard',
     'Expense tracking',
   ]
-  const proMaxFeatures = [
+  const maxFeatures = [
     'Unlimited invoices',
     'Unlimited WhatsApp reminders',
+    'Razorpay + PayPal + UPI',
+    'Multi-currency (USD/EUR/GBP)',
     'White-label invoice branding',
     'Advanced analytics',
     'Custom invoice prefix',
     'Priority support',
-    'Early access to features',
-  ]
-  const ultraProFeatures = [
-    'Everything in Pro Max',
-    'Up to 5 team members',
-    'Multiple business profiles',
+    '2 team seats',
     'API access',
-    'Dedicated support',
-    'Custom onboarding',
   ]
 
   return (
     <>
-      {/* Marquee Ticker Bar */}
-      <div 
-        className="relative overflow-hidden w-full" 
-        style={{ background: `linear-gradient(90deg, #F97316, #e85d00)` }}
-      >
-        <div 
-          className="flex animate-pulse"
-          style={{
-            animation: 'marquee 25s linear infinite',
-            whiteSpace: 'nowrap'
-          }}
-        >
-          {Array(8).fill("🔥 LAUNCH OFFER — First 10 customers get ALL plans at ₹99/mo · 2 weeks only · ")}
-        </div>
-      </div>
-
       <section id="pricing" className="py-24 md:py-32" style={{ backgroundColor: BG }}>
         <div className="container-premium">
           <div className="mx-auto mb-14 max-w-2xl text-center">
@@ -1076,30 +1061,41 @@ function Pricing() {
             </h2>
           </div>
 
-        {/* Launch Offer Banner */}
-        <div className="mx-auto mb-10 max-w-4xl">
+        {/* Launch Offer Banner with Pulsing Glow */}
+        <div className="mx-auto mb-10 max-w-6xl">
           <div 
-            className="relative overflow-hidden rounded-2xl p-8 text-center"
+            className="relative overflow-hidden rounded-2xl"
             style={{ 
-              background: `linear-gradient(135deg, ${ORANGE}, #e85d00)`,
-              animation: 'pulse-glow 2s ease-in-out infinite',
-              textShadow: '0 0 10px rgba(255,255,255,0.8)'
+              background: 'linear-gradient(135deg, #F97316, #ea6b00)',
+              animation: 'pulseGlow 2s ease-in-out infinite',
+              padding: '20px 28px',
             }}
           >
-            {/* Shimmer overlay */}
-            <div 
-              className="absolute inset-0 opacity-30"
-              style={{
-                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
-                animation: 'shimmer 3s ease-in-out infinite'
-              }}
-            />
-            <p className="text-xl font-black text-white relative z-10">
-              🔥 First 10 customers get all plans at ₹99/mo — 2 weeks only 🔥
-            </p>
-            <p className="mt-2 text-sm text-white/70 font-medium">
-              spots filling fast!
-            </p>
+            <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🔥</span>
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-wider text-white" style={{ fontSize: '14px' }}>LAUNCH OFFER</p>
+                  <p className="text-xs text-white/70" style={{ fontSize: '12px' }}>First 10 customers only · 3 months</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <p className="text-xs text-white/70" style={{ fontSize: '11px' }}>All paid plans at</p>
+                  <p className="font-black text-white" style={{ fontSize: '32px' }}>
+                    ₹99<span className="ml-1 font-normal text-white/60" style={{ fontSize: '14px' }}>/mo</span>
+                    <span className="ml-2 text-sm font-normal text-white/60 line-through">₹299/mo</span>
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
+                  </span>
+                  <p className="text-sm font-bold text-white" style={{ fontSize: '12px' }}>7 spots left</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1133,43 +1129,37 @@ function Pricing() {
               className="rounded-full border border-[#FF6B00]/35 px-2.5 py-0.5 font-inter text-[10px] font-bold uppercase tracking-wider shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
               style={{ backgroundColor: 'rgba(255, 107, 0, 0.22)', color: ORANGE }}
             >
-              Save 10%
+              Save 16%
             </span>
           </div>
         </div>
 
-        <div className="mx-auto flex max-w-7xl flex-col items-stretch gap-6 lg:flex-row lg:items-stretch lg:justify-center lg:gap-5">
+        <div className="mx-auto flex max-w-6xl flex-col items-stretch gap-6 lg:flex-row lg:items-stretch lg:justify-center lg:gap-5">
           {/* FREE */}
           <div className={cardGlass}>
             <p className="font-inter text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">FREE</p>
             <h3 className="font-inter mt-2 text-2xl font-bold tracking-tight text-white">Free forever</h3>
             <p className="mt-4 font-inter text-4xl font-black tabular-nums text-white">
               ₹0
-              {billingPeriod === 'yearly' ? (
-                <span className="text-xl font-semibold text-white/40 sm:text-2xl"> / year</span>
-              ) : null}
             </p>
             <p className="mt-4 text-sm font-medium leading-relaxed text-white/70">
-              Perfect for trying out ChaseDue
+              Taste it before you commit
             </p>
             <ul className={listClass}>
               {freeFeatures.map((f, i) => (
                 <li key={f} className="flex gap-3">
                   {i === 0 ? (
-                    <Lock className="mt-0.5 h-4 w-4 shrink-0 text-orange-500" strokeWidth={2.5} aria-hidden />
+                    <Lock className="mt-0.5 h-5 w-5 shrink-0 text-orange-500" strokeWidth={2.5} aria-hidden />
                   ) : (
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-white/50" strokeWidth={2.5} aria-hidden />
                   )}
-                  <span className={i === 0 ? 'font-semibold text-orange-500' : ''}>{f}</span>
+                  <span className={i === 0 ? 'text-base font-semibold text-orange-500' : ''}>{f}</span>
                 </li>
               ))}
             </ul>
             <Link href="/login" className={outlineBtn}>
-              Get Started for Free
+              Get Started Free
             </Link>
-            <p className="mt-3 text-center font-inter text-xs leading-relaxed text-white/45">
-              No credit card required
-            </p>
           </div>
 
           {/* PRO — Most Popular */}
@@ -1188,15 +1178,15 @@ function Pricing() {
               {billingPeriod === 'monthly' ? (
                 <>
                   <p className="font-inter text-4xl font-black tabular-nums sm:text-5xl" style={{ color: ORANGE }}>
-                    ₹299<span className="text-lg font-semibold text-white/40">/mo</span>
+                    ₹199<span className="text-lg font-semibold text-white/40">/mo</span>
                   </p>
                 </>
               ) : (
                 <>
                   <p className="font-inter text-4xl font-black tabular-nums sm:text-5xl" style={{ color: ORANGE }}>
-                    ₹3,229<span className="text-lg font-semibold text-white/40">/year</span>
+                    ₹1,999<span className="text-lg font-semibold text-white/40">/year</span>
                   </p>
-                  <p className="mt-2 text-sm text-white/50 line-through">₹3,588/year</p>
+                  <p className="mt-2 text-sm text-white/50 line-through">₹2,388/year</p>
                 </>
               )}
             </div>
@@ -1220,73 +1210,38 @@ function Pricing() {
             </Link>
           </div>
 
-          {/* PRO MAX */}
+          {/* MAX */}
           <div className={cardGlass}>
-            <p className="font-inter text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">PRO MAX</p>
+            <p className="font-inter text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">MAX</p>
             <div className="mt-3">
               {billingPeriod === 'monthly' ? (
                 <>
                   <p className="font-inter text-4xl font-black tabular-nums text-white sm:text-5xl">
-                    ₹799<span className="text-lg font-semibold text-white/40">/mo</span>
+                    ₹499<span className="text-lg font-semibold text-white/40">/mo</span>
                   </p>
                 </>
               ) : (
                 <>
                   <p className="font-inter text-4xl font-black tabular-nums text-white sm:text-5xl">
-                    ₹8,629<span className="text-lg font-semibold text-white/40">/year</span>
+                    ₹4,999<span className="text-lg font-semibold text-white/40">/year</span>
                   </p>
-                  <p className="mt-2 text-sm text-white/50 line-through">₹9,588/year</p>
+                  <p className="mt-2 text-sm text-white/50 line-through">₹5,988/year</p>
                 </>
               )}
             </div>
             <p className="mt-5 text-sm font-medium leading-relaxed text-white/70">
-              For serious freelancers with high volume
+              Best for global freelancers
             </p>
             <ul className={listClass}>
-              {proMaxFeatures.map((f) => (
+              {maxFeatures.map((f) => (
                 <li key={f} className="flex gap-3">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-white/50" strokeWidth={2.5} aria-hidden />
                   <span>{f}</span>
                 </li>
               ))}
             </ul>
-            <Link href={'/login?next=' + encodeURIComponent('/dashboard/billing?plan=pro_max')} className={outlineBtn}>
-              Get Pro Max
-            </Link>
-          </div>
-
-          {/* ULTRA PRO */}
-          <div className={cardGlass}>
-            <p className="font-inter text-[11px] font-bold uppercase tracking-[0.2em] text-white/45">ULTRA PRO</p>
-            <div className="mt-3">
-              {billingPeriod === 'monthly' ? (
-                <>
-                  <p className="font-inter text-4xl font-black tabular-nums text-white sm:text-5xl">
-                    ₹1,499<span className="text-lg font-semibold text-white/40">/mo</span>
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p className="font-inter text-4xl font-black tabular-nums text-white sm:text-5xl">
-                    ₹16,189<span className="text-lg font-semibold text-white/40">/year</span>
-                  </p>
-                  <p className="mt-2 text-sm text-white/50 line-through">₹17,988/year</p>
-                </>
-              )}
-            </div>
-            <p className="mt-5 text-sm font-medium leading-relaxed text-white/70">
-              For teams and agencies
-            </p>
-            <ul className={listClass}>
-              {ultraProFeatures.map((f) => (
-                <li key={f} className="flex gap-3">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-white/50" strokeWidth={2.5} aria-hidden />
-                  <span>{f}</span>
-                </li>
-              ))}
-            </ul>
-            <Link href={'/login?next=' + encodeURIComponent('/dashboard/billing?plan=ultra_pro')} className={outlineBtn}>
-              Get Ultra Pro
+            <Link href={'/login?next=' + encodeURIComponent('/dashboard/billing?plan=max')} className={outlineBtn}>
+              Get Max
             </Link>
           </div>
         </div>
