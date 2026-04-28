@@ -5,14 +5,6 @@ import path from 'path'
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
-// Import types for jspdf-autotable
-declare module 'jspdf' {
-  interface jsPDF {
-    autoTable: (options: any) => void
-    lastAutoTable: { finalY: number }
-  }
-}
-
 /**
  * Convert logo file to base64 data URL
  */
@@ -196,7 +188,8 @@ export async function renderChaseDueInvoicePdf(
     fmt(item.amount)
   ])
 
-  doc.autoTable({
+  // Items table using autoTable
+  autoTable(doc, {
     head: [['#', 'Item & Description', 'Qty', 'Rate', 'Amount']],
     body: tableData,
     startY: currentY,
@@ -226,7 +219,7 @@ export async function renderChaseDueInvoicePdf(
   })
 
   // Get table end position
-  const tableEndY = doc.lastAutoTable.finalY + 10
+  const tableEndY = (doc as any).lastAutoTable?.finalY ? (doc as any).lastAutoTable.finalY + 10 : currentY + 50
 
   // Totals section (right side)
   const totalsX = pageWidth - rightMargin - 60
