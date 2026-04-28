@@ -41,11 +41,11 @@ export function normalizeHttpOrigin(input: string): string | null {
 }
 
 /**
- * Absolute URL for WhatsApp “Chase” links (`https://chasedue.in/portal/[id]`).
+ * Absolute URL for WhatsApp “Chase” links (`https://chasedue.com/portal/[id]`).
  * Set `NEXT_PUBLIC_CHASE_PORTAL_ORIGIN=http://localhost:3000` in `.env.local` while testing.
  */
 export function getChasePortalUrl(invoiceId: string): string {
-  const base = process.env.NEXT_PUBLIC_CHASE_PORTAL_ORIGIN?.replace(/\/$/, '') ?? 'https://chasedue.in'
+  const base = process.env.NEXT_PUBLIC_CHASE_PORTAL_ORIGIN?.replace(/\/$/, '') ?? 'https://chasedue.com'
   return `${base}/portal/${invoiceId}`
 }
 

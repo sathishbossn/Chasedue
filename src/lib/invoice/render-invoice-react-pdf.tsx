@@ -5,7 +5,16 @@ import type { InvoicePdfViewModel } from '@/lib/invoice/invoice-pdf-types'
 // Register NotoSans font for rupee symbol support
 Font.register({
   family: 'NotoSans',
-  src: 'https://fonts.gstatic.com/s/notosans/v36/o-0IIpQlx3QUlC5A4PNr5TRA.woff2',
+  fonts: [
+    {
+      src: 'https://fonts.gstatic.com/s/notosans/v36/o-0IIpQlx3QUlC5A4PNr5TRA.woff2',
+      fontWeight: 'normal',
+    },
+    {
+      src: 'https://fonts.gstatic.com/s/notosans/v36/o-0HIpQlx3QUlC5A4PNr5TRASvaR.woff2',
+      fontWeight: 'bold',
+    },
+  ],
 })
 
 // Styles
@@ -238,7 +247,7 @@ const styles = StyleSheet.create({
 
 // Helper functions
 function fmt(n: number): string {
-  return '₹' + new Intl.NumberFormat('en-IN', { 
+  return 'Rs. ' + new Intl.NumberFormat('en-IN', { 
     minimumFractionDigits: 2, 
     maximumFractionDigits: 2 
   }).format(n)
@@ -254,7 +263,8 @@ function formatRateLabel(n: number): string {
 // Invoice PDF Document Component
 function InvoicePdfDocument({ data, logoBase64 }: { data: InvoicePdfViewModel; logoBase64: string }) {
   const isPaid = data.status === 'PAID' || data.status === 'SETTLED' || data.status === 'COMPLETED'
-  const businessName = data.seller.businessName || 'Your Business Name'
+  const businessName = data.seller.businessName
+  const hasValidBusinessName = businessName && businessName.trim() !== '' && businessName !== 'Seller'
 
   return (
     <Document>
@@ -263,8 +273,10 @@ function InvoicePdfDocument({ data, logoBase64 }: { data: InvoicePdfViewModel; l
         <View style={styles.header}>
           <View style={styles.headerLeft}>
             {logoBase64 && <Image src={logoBase64} style={styles.logo} />}
-            <Text style={styles.businessName}>{businessName || 'Your Business'}</Text>
-            {data.seller.address && data.seller.address !== '—' && data.seller.address !== '— | —' && (
+            {hasValidBusinessName && (
+              <Text style={styles.businessName}>{businessName}</Text>
+            )}
+            {data.seller.address && data.seller.address !== '—' && data.seller.address !== '— | —' && data.seller.address !== 'India' && (
               <Text style={styles.sellerInfo}>{data.seller.address}</Text>
             )}
             {data.seller.gstin && data.seller.gstin !== '—' && data.seller.gstin !== '— | —' && (

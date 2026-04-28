@@ -71,7 +71,7 @@ export function buildInvoicePaymentWhatsappLink(
 export type ManualReminderWhatsappInput = {
   clientName: string
   invoiceId: string
-  /** Display amount, e.g. "25,000.00" — template adds ₹ prefix. */
+  /** Display amount, e.g. "25,000.00" — template adds Rs. prefix. */
   amount: string
   razorpayLink: string
 }
@@ -81,7 +81,7 @@ export type ManualReminderWhatsappInput = {
  */
 export function buildManualReminderWhatsappMessage(input: ManualReminderWhatsappInput): string {
   const { clientName, invoiceId, amount, razorpayLink } = input
-  return `Hi ${clientName}, this is a payment reminder from *ChaseDue* for Invoice ${invoiceId} for ₹${amount}. You can pay here: ${razorpayLink}. Thanks!`
+  return `Hi ${clientName}, this is a payment reminder from *ChaseDue* for Invoice ${invoiceId} for Rs. ${amount}. You can pay here: ${razorpayLink}. Thanks!`
 }
 
 export function buildManualReminderWhatsappUrl(phoneDigits: string, input: ManualReminderWhatsappInput): string {

@@ -25,7 +25,7 @@ const fontDisplay = Fraunces({
   display: 'swap',
 })
 
-const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://chasedue.in'
+const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://chasedue.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: 'ChaseDue — Get paid faster. No awkward follow-ups.',
     description:
       'A single WhatsApp reminder gets you massive results — you get paid 68% of the time.',
-    url: 'https://chasedue.in',
+    url: 'https://chasedue.com',
     siteName: 'ChaseDue',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'ChaseDue' }],
     type: 'website',

@@ -1556,7 +1556,7 @@ function FaqBlock() {
             </a>
           ) : (
             <a
-              href="mailto:support@chasedue.in?subject=ChaseDue%20%E2%80%94%20WhatsApp"
+              href="mailto:support@chasedue.com?subject=ChaseDue%20%E2%80%94%20WhatsApp"
               className="font-semibold underline-offset-4 transition hover:underline"
               style={{ color: ORANGE }}
             >
@@ -1634,7 +1634,7 @@ function FooterCta() {
             <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
           </Link>
           <Link
-            href="mailto:support@chasedue.in"
+            href="mailto:support@chasedue.com"
             className={`inline-flex min-h-[52px] items-center justify-center rounded-xl px-8 text-base font-semibold text-white/90 ${btnGhostGlow}`}
           >
             Contact sales

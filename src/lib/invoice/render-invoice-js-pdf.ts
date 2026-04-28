@@ -5,7 +5,7 @@ import type { InvoicePdfViewModel } from '@/lib/invoice/invoice-pdf-types'
  * Format currency for display
  */
 function fmt(n: number): string {
-  return '₹' + new Intl.NumberFormat('en-IN', { 
+  return 'Rs. ' + new Intl.NumberFormat('en-IN', { 
     minimumFractionDigits: 2, 
     maximumFractionDigits: 2 
   }).format(n)
@@ -93,14 +93,18 @@ export async function renderInvoiceJsPdf(
     }
   }
 
-  // Business name in orange bold
-  const businessName = data.seller.businessName || 'Your Business Name'
-  doc.setFontSize(11)
-  doc.setFont('helvetica', 'bold')
-  doc.setTextColor(ORANGE)
-  doc.text(businessName, margin, yPosition + 14)
-
-  yPosition += 18
+  // Business name in orange bold (only if valid)
+  const businessName = data.seller.businessName
+  const hasValidBusinessName = businessName && businessName.trim() !== '' && businessName !== 'Seller'
+  if (hasValidBusinessName) {
+    doc.setFontSize(11)
+    doc.setFont('helvetica', 'bold')
+    doc.setTextColor(ORANGE)
+    doc.text(businessName, margin, yPosition + 14)
+    yPosition += 18
+  } else {
+    yPosition += 10
+  }
 
   // Address lines
   doc.setFontSize(8)
