@@ -150,73 +150,110 @@ function Nav() {
   )
 }
 
-/** Pure Tailwind WhatsApp-style hero illustration — no external image URLs */
-function HeroWhatsAppIllustration() {
+const CHASEDUE_PINK = '#ED13C4'
+
+type Tone = 'friendly' | 'professional' | 'strict'
+
+const toneMessages: Record<Tone, { label: string; message: string }> = {
+  friendly: {
+    label: 'Friendly',
+    message: "Hey Rahul! Just a quick nudge on this invoice. Hope you're having a great week! Link: chasedue.com/portal/abc123",
+  },
+  professional: {
+    label: 'Professional',
+    message: 'Hi Rahul, this is an automated reminder from ChaseDue. Invoice #INV-1042 is now due. You can pay here: chasedue.com/portal/abc123',
+  },
+  strict: {
+    label: 'Strict',
+    message: 'Notice: Invoice #INV-1042 is now 3 days overdue. Please settle the payment today to avoid service interruption. Link: chasedue.com/portal/abc123',
+  },
+}
+
+/** WhatsApp Demo with Tone of Voice selector */
+function WhatsAppDemo() {
+  const [tone, setTone] = useState<Tone>('friendly')
+  const currentMessage = toneMessages[tone]
+
   return (
-    <div
-      className="mx-auto w-full max-w-[320px] overflow-hidden rounded-3xl border border-white/[0.12] bg-[#0a0e11] ring-1 ring-white/[0.06]"
-      style={{ boxShadow: '0 0 50px rgba(255, 107, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.04)' }}
-    >
-      {/* Green WhatsApp-style header */}
-      <div className="flex items-center gap-3 bg-gradient-to-b from-[#1f8f54] to-[#0d5c3f] px-4 py-3">
-        <button type="button" className="text-white/90" aria-label="Back">
-          <span className="text-lg leading-none">‹</span>
-        </button>
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 ring-2 ring-white/20">
-          <Zap className="h-5 w-5 text-white" strokeWidth={2} aria-hidden />
+    <div className="mx-auto w-full max-w-[360px]">
+      {/* Tone Selector */}
+      <div className="mb-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4">
+        <p className="mb-3 text-center text-[11px] font-semibold uppercase tracking-[0.15em] text-white/50">
+          Tone of Voice
+        </p>
+        <div className="flex gap-2">
+          {(Object.keys(toneMessages) as Tone[]).map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => setTone(t)}
+              className="flex-1 rounded-xl px-3 py-2 text-[12px] font-medium transition-all duration-200"
+              style={{
+                backgroundColor: tone === t ? CHASEDUE_PINK : 'rgba(255,255,255,0.06)',
+                color: tone === t ? '#fff' : 'rgba(255,255,255,0.7)',
+                boxShadow: tone === t ? '0 4px 20px rgba(237, 19, 196, 0.35)' : 'none',
+              }}
+            >
+              {toneMessages[t].label}
+            </button>
+          ))}
         </div>
-        <div className="min-w-0 flex-1">
-          <p className="truncate font-inter text-[15px] font-semibold text-white">ChaseDue</p>
-          <p className="text-[11px] text-emerald-100/85">Business account</p>
-        </div>
-        <span className="text-white/70" aria-hidden>
-          ⋮
-        </span>
       </div>
 
-      {/* Chat surface (dark) */}
-      <div className="relative min-h-[300px] bg-[#0b141a] px-3 pb-6 pt-4">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40' fill='%23ffffff'/%3E%3C/svg%3E")`,
-          }}
-          aria-hidden
-        />
-        <p className="relative mb-4 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-white/30">
-          Today
-        </p>
-
-        {/* Incoming: invoice notification */}
-        <div className="relative mb-3 max-w-[92%] rounded-2xl rounded-tl-md border border-white/[0.06] bg-[#1b3944] px-3.5 py-2.5 shadow-md">
-          <p className="text-[10px] font-bold uppercase tracking-wide text-emerald-200/90">ChaseDue</p>
-          <p className="mt-1.5 text-[13px] leading-snug text-white/95">
-            <span className="font-semibold">Invoice reminder</span>
-            <br />
-            <span className="text-white/80">INV-1042 · ₹48,500 · Due in 2 days</span>
-          </p>
-          <p className="mt-2 text-[12px] leading-snug text-white/75">
-            Tap below to view your invoice and pay securely via UPI or card.
-          </p>
-          <div
-            className="mt-2.5 inline-flex w-full items-center justify-center rounded-lg py-2 text-center text-[12px] font-bold text-white"
-            style={{ backgroundColor: ORANGE }}
-          >
-            View invoice &amp; Pay
+      {/* WhatsApp Preview */}
+      <div
+        className="overflow-hidden rounded-3xl border border-white/[0.12] bg-[#0a0e11] ring-1 ring-white/[0.06]"
+        style={{ boxShadow: '0 0 50px rgba(237, 19, 196, 0.2), inset 0 1px 0 rgba(255,255,255,0.04)' }}
+      >
+        {/* Green WhatsApp-style header */}
+        <div className="flex items-center gap-3 bg-gradient-to-b from-[#1f8f54] to-[#0d5c3f] px-4 py-3">
+          <button type="button" className="text-white/90" aria-label="Back">
+            <span className="text-lg leading-none">‹</span>
+          </button>
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 ring-2 ring-white/20">
+            <Zap className="h-5 w-5 text-white" strokeWidth={2} aria-hidden />
           </div>
+          <div className="min-w-0 flex-1">
+            <p className="truncate font-inter text-[15px] font-semibold text-white">ChaseDue</p>
+            <p className="text-[11px] text-emerald-100/85">Business account</p>
+          </div>
+          <span className="text-white/70" aria-hidden>
+            ⋮
+          </span>
         </div>
 
-        {/* Outgoing bubble */}
-        <div className="relative ml-auto max-w-[85%] rounded-2xl rounded-tr-md border border-white/[0.08] bg-[#053b4c] px-3 py-2 shadow-md">
-          <p className="text-right text-[12px] leading-relaxed text-white/90">Sounds good — paying now.</p>
-          <p className="mt-1 text-right text-[10px] text-white/40">10:24</p>
-        </div>
+        {/* Chat surface (dark) */}
+        <div className="relative min-h-[280px] bg-[#0b141a] px-3 pb-4 pt-4">
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.07]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40' fill='%23ffffff'/%3E%3C/svg%3E")`,
+            }}
+            aria-hidden
+          />
+          <p className="relative mb-4 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-white/30">
+            Today
+          </p>
 
-        {/* Incoming: confirmation */}
-        <div className="relative mt-3 max-w-[92%] rounded-2xl rounded-tl-md border border-white/[0.06] bg-[#1b3944] px-3.5 py-2 shadow-md">
-          <p className="text-[10px] font-bold uppercase tracking-wide text-emerald-200/90">ChaseDue</p>
-          <p className="mt-1 text-[12px] text-white/90">Payment received. Reminders for this invoice are turned off.</p>
-          <p className="mt-1 text-[10px] text-white/40">10:26</p>
+          {/* Incoming: ChaseDue reminder with dynamic message */}
+          <div className="relative mb-3 max-w-[92%] rounded-2xl rounded-tl-md border border-white/[0.06] bg-[#1b3944] px-3.5 py-2.5 shadow-md transition-all duration-300">
+            <p className="text-[10px] font-bold uppercase tracking-wide text-emerald-200/90">ChaseDue</p>
+            <p className="mt-2 text-[13px] leading-snug text-white/95 transition-all duration-300">
+              {currentMessage.message}
+            </p>
+            <p className="mt-2 text-[10px] text-white/40">Now</p>
+          </div>
+
+          {/* Status indicator */}
+          <div className="flex items-center gap-2 px-1">
+            <div
+              className="h-2 w-2 rounded-full"
+              style={{ backgroundColor: CHASEDUE_PINK }}
+            />
+            <span className="text-[10px] text-white/40">
+              Preview: {currentMessage.label} tone
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -280,7 +317,7 @@ function Hero() {
             transition={{ duration: 0.6, delay: 0.08, ease }}
             className="flex justify-center lg:justify-end"
           >
-            <HeroWhatsAppIllustration />
+            <WhatsAppDemo />
           </motion.div>
         </div>
       </div>
