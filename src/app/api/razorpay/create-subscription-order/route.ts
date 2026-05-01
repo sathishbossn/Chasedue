@@ -84,6 +84,13 @@ export async function POST(request: Request) {
     // Create Razorpay order
     let order
     try {
+      console.log('[ChaseDue] Creating Razorpay order:', {
+        amount: finalAmount,
+        currency: 'INR',
+        receipt: `sub_${userId}_${plan}_${Date.now()}`,
+        keyId: keyId.slice(0, 8) + '...', // Log partial key for debugging
+      })
+
       order = await razorpay.orders.create({
         amount: finalAmount,
         currency: 'INR',
@@ -95,10 +102,21 @@ export async function POST(request: Request) {
           isLaunchOffer: String(isLaunchOffer),
         },
       })
-    } catch (razorpayError) {
+
+      console.log('[ChaseDue] Razorpay order created:', order.id)
+    } catch (razorpayError: any) {
       console.error('[ChaseDue] Razorpay order creation failed:', razorpayError)
-      const errorMessage = razorpayError instanceof Error ? razorpayError.message : 'Razorpay API error'
-      return NextResponse.json({ error: `Razorpay error: ${errorMessage}` }, { status: 502 })
+      console.error('[ChaseDue] Razorpay error details:', {
+        message: razorpayError?.message,
+        code: razorpayError?.code,
+        statusCode: razorpayError?.statusCode,
+        description: razorpayError?.description,
+      })
+      const errorMessage = razorpayError?.message || razorpayError?.description || 'Razorpay API error'
+      return NextResponse.json(
+        { error: `Razorpay error: ${errorMessage}`, details: razorpayError?.description },
+        { status: 502 }
+      )
     }
 
     return NextResponse.json({

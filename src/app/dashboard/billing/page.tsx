@@ -28,6 +28,8 @@ export default function DashboardBillingPage() {
     })
   }, [supabase])
 
+  const [errorInfo, setErrorInfo] = useState<string | null>(null)
+
   const handlePayment = async () => {
     if (!userId) {
       toast.error('Please sign in to upgrade')
@@ -35,19 +37,34 @@ export default function DashboardBillingPage() {
     }
 
     setLoading(true)
+    setErrorInfo(null)
 
     try {
       // Step 1: Create order
+      console.log('[ChaseDue] Creating order:', { plan, billing, userId })
       const orderRes = await fetch('/api/razorpay/create-subscription-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan, billing, userId }),
       })
 
-      const orderData = await orderRes.json()
+      console.log('[ChaseDue] Order response status:', orderRes.status)
+
+      let orderData
+      try {
+        orderData = await orderRes.json()
+      } catch (jsonErr) {
+        const text = await orderRes.text()
+        console.error('[ChaseDue] Failed to parse JSON response:', text)
+        throw new Error(`Server returned invalid JSON: ${text.slice(0, 100)}`)
+      }
+
+      console.log('[ChaseDue] Order response:', orderData)
 
       if (!orderRes.ok) {
-        throw new Error(orderData.error || 'Failed to create order')
+        const errMsg = orderData.error || `Server error: ${orderRes.status}`
+        setErrorInfo(errMsg)
+        throw new Error(errMsg)
       }
 
       // Step 2: Load Razorpay script
@@ -122,7 +139,10 @@ export default function DashboardBillingPage() {
       const rzp = new Razorpay(options)
       rzp.open()
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Something went wrong')
+      const msg = error instanceof Error ? error.message : 'Something went wrong'
+      console.error('[ChaseDue] Payment error:', error)
+      setErrorInfo(msg)
+      toast.error(msg)
       setLoading(false)
     }
   }
@@ -200,6 +220,17 @@ export default function DashboardBillingPage() {
             </>
           )}
         </p>
+
+        {/* Error Display */}
+        {errorInfo && (
+          <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+            <p className="font-semibold text-red-300">Error:</p>
+            <p className="break-words">{errorInfo}</p>
+            <p className="mt-2 text-xs text-red-300/70">
+              Check browser console (F12 → Console) for more details.
+            </p>
+          </div>
+        )}
 
         {/* Pay Button with Loading State */}
         <button
