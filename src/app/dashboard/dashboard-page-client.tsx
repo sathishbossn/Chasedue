@@ -9,6 +9,9 @@ import InvoiceEssentialGrid from '@/components/dashboard/invoice-essential-grid'
 import DashboardRevenueMilestone from '@/components/dashboard/dashboard-revenue-milestone'
 import { formatInrFromCents } from '@/lib/money'
 import DashboardStats from '@/components/dashboard/dashboard-stats'
+import { UpgradeBanner } from '@/components/UpgradeBanner'
+import { UpgradeModal } from '@/components/UpgradeModal'
+import { getTrialStatus } from '@/lib/trial'
 import {
   getDashboardSnapshot,
   listClientsForUser,
@@ -18,11 +21,17 @@ import { INVOICE_SYNC_EVENT } from '@/lib/chasedue-sync'
 
 type ClientOption = { id: string; name: string; company: string | null }
 
+type TrialState = {
+  isPro: boolean
+  daysLeft: number
+  isTrialActive: boolean
+}
+
 type LoadState =
   | { status: 'loading' }
   | { status: 'unauthorized' }
   | { status: 'error'; message: string }
-  | { status: 'ready'; snapshot: DashboardSnapshot; clients: ClientOption[] }
+  | { status: 'ready'; snapshot: DashboardSnapshot; clients: ClientOption[]; trial: TrialState }
 
 /**
  * Dashboard UI + data: waits for an authenticated session before loading invoices.
@@ -30,6 +39,7 @@ type LoadState =
  */
 export default function DashboardPageClient() {
   const [state, setState] = useState<LoadState>({ status: 'loading' })
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -61,10 +71,14 @@ export default function DashboardPageClient() {
 
       const clients = clientsRes.ok ? clientsRes.clients : []
 
+      // Get trial status
+      const trial = await getTrialStatus(session.user.id)
+
       setState({
         status: 'ready',
         snapshot: snapshot.data,
         clients,
+        trial,
       })
     }
 
@@ -156,10 +170,25 @@ export default function DashboardPageClient() {
   }
 
   const d = state.snapshot
-  const { clients } = state
+  const { clients, trial } = state
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+      {/* Upgrade Banner - only show during trial */}
+      {trial.isTrialActive && (
+        <UpgradeBanner
+          daysLeft={trial.daysLeft}
+          onUpgradeClick={() => setIsModalOpen(true)}
+        />
+      )}
+
+      {/* Upgrade Modal */}
+      <UpgradeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        userId={d.userId}
+      />
+
       <div className="mb-8 rounded-xl border border-white/[0.1] bg-white/[0.05] px-5 py-5 shadow-lg shadow-black/20 backdrop-blur-md sm:px-6">
         <div className="min-w-0">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#F97316]">
